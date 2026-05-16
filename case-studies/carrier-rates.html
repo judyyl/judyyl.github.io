@@ -90,10 +90,26 @@
   /* CASE STUDY HERO */
   .cs-hero {
     background: var(--sdk);
-    padding: 120px 2rem 80px;
+    padding: 140px 2rem 100px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  .cs-hero-inner { max-width: var(--max); margin: 0 auto; }
+  .cs-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0.18;
+  }
+  .cs-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(30,52,72,0.6) 0%, rgba(26,22,18,0.88) 100%);
+  }
+  .cs-hero-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 1; }
   .cs-eyebrow {
     font-size: 10px;
     letter-spacing: 0.2em;
@@ -315,7 +331,7 @@
   .cs-explorations { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
   .cs-exp {
     display: grid;
-    grid-template-columns: 1fr 1.8fr;
+    grid-template-columns: 1fr 2.5fr;
     gap: 3rem;
     align-items: center;
     padding: 3rem 0;
@@ -414,7 +430,7 @@
     width: 100%;
     display: block;
     border-radius: 8px;
-    box-shadow: 0 8px 40px rgba(26,22,18,0.14);
+    box-shadow: 0 16px 60px rgba(26,22,18,0.28), 0 4px 16px rgba(26,22,18,0.12);
   }
 
   /* Wide section — breaks out of the 740px content column */
@@ -581,6 +597,8 @@
 
 <!-- HERO -->
 <section class="cs-hero">
+  <img class="cs-hero-bg" src="../images/carrier-rates/cover.png" alt="">
+  <div class="cs-hero-overlay"></div>
   <div class="cs-hero-inner">
     <span class="cs-eyebrow">Lab Management System · Glidewell Dental · 2024</span>
     <h1 class="cs-title">Invoicing:<br><em>Carrier Rates</em><br>Redesign</h1>
@@ -615,14 +633,6 @@
   </div>
 </div>
 
-<!-- COVER IMAGE -->
-<div class="cs-cover">
-  <img src="../images/carrier-rates/cover.png" alt="Invoicing carrier rates full screen"
-    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-  <div class="cs-cover-placeholder" style="display:none;">
-    <p>Add cover.png to images/carrier-rates/</p>
-  </div>
-</div>
 
 <!-- CONTENT -->
 <div class="cs-content">
