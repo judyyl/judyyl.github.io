@@ -90,26 +90,10 @@
   /* CASE STUDY HERO */
   .cs-hero {
     background: var(--sdk);
-    padding: 140px 2rem 100px;
+    padding: 120px 2rem 80px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
   }
-  .cs-hero-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    opacity: 0.18;
-  }
-  .cs-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(30,52,72,0.6) 0%, rgba(26,22,18,0.88) 100%);
-  }
-  .cs-hero-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 1; }
+  .cs-hero-inner { max-width: var(--max); margin: 0 auto; }
   .cs-eyebrow {
     font-size: 10px;
     letter-spacing: 0.2em;
@@ -597,8 +581,6 @@
 
 <!-- HERO -->
 <section class="cs-hero">
-  <img class="cs-hero-bg" src="../images/carrier-rates/cover.png" alt="">
-  <div class="cs-hero-overlay"></div>
   <div class="cs-hero-inner">
     <span class="cs-eyebrow">Lab Management System · Glidewell Dental · 2024</span>
     <h1 class="cs-title">Invoicing:<br><em>Carrier Rates</em><br>Redesign</h1>
@@ -633,6 +615,15 @@
   </div>
 </div>
 
+
+<!-- COVER IMAGE -->
+<div class="cs-cover">
+  <img src="../images/carrier-rates/cover.png" alt="Invoicing carrier rates full screen"
+    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+  <div class="cs-cover-placeholder" style="display:none;">
+    <p>Add cover.png to images/carrier-rates/</p>
+  </div>
+</div>
 
 <!-- CONTENT -->
 <div class="cs-content">
