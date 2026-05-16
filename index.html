@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Judy Lee — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --linen:    #FEFCF9;
+    --wl:       #F3EEE6;
+    --sand:     #D9C9B0;
+    --wg:       #6B6560;
+    --lg:       #C4BDB6;
+    --slt:      #EAF1F8;
+    --smid:     #8AAAC8;
+    --slate:    #4A72A0;
+    --sdeep:    #2E557A;
+    --sdk:      #1E3448;
+    --obs:      #1A1612;
+    --white:    #FFFFFF;
+    --max:      900px;
+    --serif:    'Cormorant Garamond', Georgia, serif;
+    --sans:     'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--linen);
+    color: var(--obs);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(254,252,249,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    gap: 0;
+  }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--obs);
+    line-height: 1;
+  }
+  .nav-logo-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--slate);
+    margin-top: 4px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--wg);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--obs); }
+  .nav-cta {
+    font-size: 10px !important;
+    letter-spacing: 0.1em !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+    background: var(--obs);
+    padding: 7px 16px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--sdk) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 2rem 80px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wg);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+  .hero-eyebrow-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--slate);
+    flex-shrink: 0;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1.1s ease 0.1s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--slate);
+  }
+  .hero-rule {
+    width: 48px;
+    height: 1px;
+    background: var(--slate);
+    margin: 0 auto 2rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
+  }
+  .hero-desc {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--wg);
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--obs);
+    text-decoration: none;
+    border-bottom: 1px solid var(--obs);
+    padding-bottom: 3px;
+    transition: color 0.2s, border-color 0.2s;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.65s forwards;
+  }
+  .hero-cta:hover { color: var(--slate); border-color: var(--slate); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 1s forwards;
+  }
+  .hero-scroll span {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--lg), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section {
+    padding: 6rem 2rem;
+  }
+  .section-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 3rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--sand);
+  }
+
+  /* ── WORK ── */
+  .work-section { background: var(--linen); }
+  .work-intro {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .work-intro h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .work-intro h2 em { font-style: italic; color: var(--slate); }
+  .work-intro p {
+    font-size: 13px;
+    color: var(--wg);
+    line-height: 1.8;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* Project list — Alice Gao style: stacked, image-led */
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--sand);
+  }
+  .project-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--sand);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s;
+    min-height: 320px;
+  }
+  .project-item:hover { background: var(--wl); }
+  .project-item.reverse { direction: rtl; }
+  .project-item.reverse > * { direction: ltr; }
+
+  .project-img {
+    background: var(--wl);
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+  }
+  .project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+    opacity: 0.9;
+  }
+  .project-item:hover .project-img img { transform: scale(1.03); }
+
+  /* Placeholder when no image */
+  .project-img-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .placeholder-num {
+    font-family: var(--serif);
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--sand);
+    line-height: 1;
+  }
+  .placeholder-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  .project-info {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-left: 1px solid var(--sand);
+  }
+  .project-item.reverse .project-info {
+    border-left: none;
+    border-right: 1px solid var(--sand);
+  }
+  .project-tag {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 1rem;
+  }
+  .project-name {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+  }
+  .project-item:hover .project-name { color: var(--slate); }
+  .project-desc {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--wg);
+    margin-bottom: 2rem;
+  }
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .project-year {
+    font-family: var(--serif);
+    font-size: 11px;
+    color: var(--lg);
+    letter-spacing: 0.1em;
+  }
+  .project-arrow {
+    font-size: 18px;
+    color: var(--slate);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .project-item:hover .project-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* ── ABOUT ── */
+  .about-section { background: var(--obs); color: var(--linen); }
+  .about-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-left h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+  .about-left h2 em { font-style: italic; color: var(--smid); }
+  .about-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--smid);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: block;
+  }
+  .about-right p {
+    font-size: 13px;
+    line-height: 1.95;
+    color: rgba(254,252,249,0.55);
+    margin-bottom: 1rem;
+  }
+  .skills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1.5rem;
+  }
+  .skill {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--smid);
+    border: 1px solid rgba(138,170,200,0.3);
+    padding: 4px 10px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill:hover { border-color: var(--smid); color: var(--linen); }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--wl);
+    border-top: 1px solid var(--sand);
+    text-align: center;
+    padding: 7rem 2rem;
+  }
+  .contact-inner { max-width: var(--max); margin: 0 auto; }
+  .contact-label {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+  }
+  .contact-title em { font-style: italic; color: var(--slate); }
+  .contact-email {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+    font-weight: 300;
+    color: var(--obs);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid var(--obs);
+    padding-bottom: 3px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .contact-email:hover { color: var(--slate); border-color: var(--slate); }
+  .contact-note {
+    font-size: 12px;
+    color: var(--wg);
+    margin-top: 1.5rem;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--obs);
+    padding: 1.5rem 2rem;
+  }
+  .footer-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-family: var(--serif);
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(254,252,249,0.3);
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(254,252,249,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--smid); }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes scrollPulse { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">JL</span>
+      <span class="nav-logo-rule"></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="mailto:hello@judylee.design" class="nav-cta">Hire me</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="position:relative;">
+  <div class="hero-eyebrow">
+    <span class="hero-eyebrow-dot"></span>
+    Product Designer — Available for work
+  </div>
+  <h1 class="hero-title">
+    Complexity,<br><em>simplified</em><br>by design.
+  </h1>
+  <div class="hero-rule"></div>
+  <p class="hero-desc">
+    I design enterprise software that makes hard workflows feel effortless — turning complex processes into products people actually want to use.
+  </p>
+  <a href="#work" class="hero-cta">View selected work →</a>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section work-section" id="work">
+  <div class="section-inner">
+    <div class="section-label">Selected Work</div>
+    <div class="work-intro reveal">
+      <h2>Recent <em>projects</em></h2>
+      <p>Enterprise UX, lab management, and lead management tools — designed with research, shipped with care.</p>
+    </div>
+
+    <div class="project-list">
+
+      <!-- Project 01 -->
+      <a class="project-item reveal" href="case-studies/carrier-rates.html">
+        <div class="project-img">
+          <!-- Replace src with your actual image -->
+          <img src="images/carrier-rates/cover.png" alt="Invoicing Carrier Rates Redesign"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="project-img-placeholder" style="display:none;">
+            <span class="placeholder-num">01</span>
+            <span class="placeholder-label">Add cover.png to images/carrier-rates/</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <div>
+            <p class="project-tag">Lab Management System · UX Redesign</p>
+            <h3 class="project-name">Invoicing: Carrier<br>Rates Redesign</h3>
+            <p class="project-desc">One design change. 91.66% fewer API calls. Zero disruption to users.</p>
+          </div>
+          <div class="project-meta">
+            <span class="project-year">2024</span>
+            <span class="project-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 02 -->
+      <a class="project-item reverse reveal d1" href="case-studies/related-cases.html">
+        <div class="project-img">
+          <img src="images/related-cases/cover.png" alt="Related Cases Return Entry Redesign"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="project-img-placeholder" style="display:none;">
+            <span class="placeholder-num">02</span>
+            <span class="placeholder-label">Add cover.png to images/related-cases/</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <div>
+            <p class="project-tag">Lab Management System · Return Workflow</p>
+            <h3 class="project-name">Related Cases:<br>Return Entry Redesign</h3>
+            <p class="project-desc">Inherited a shelved solution, a hard deadline, and a team expecting the impossible. Here's what shipped.</p>
+          </div>
+          <div class="project-meta">
+            <span class="project-year">2024</span>
+            <span class="project-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 03 -->
+      <a class="project-item reveal d2" href="case-studies/multiple-queues.html">
+        <div class="project-img">
+          <img src="images/multiple-queues/cover.png" alt="Multiple Queues Lead Management"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="project-img-placeholder" style="display:none;">
+            <span class="placeholder-num">03</span>
+            <span class="placeholder-label">Add cover.png to images/multiple-queues/</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <div>
+            <p class="project-tag">Lead Management · Dashboard Design</p>
+            <h3 class="project-name">Multiple Queues:<br>One Dashboard, Every Lead.</h3>
+            <p class="project-desc">No direct user access. No clear requirements. Just a hard deadline and a client who needed something that didn't exist yet.</p>
+          </div>
+          <div class="project-meta">
+            <span class="project-year">2022</span>
+            <span class="project-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="about-inner">
+    <div class="about-left reveal">
+      <span class="about-label">About</span>
+      <h2>Designing for<br>the workflows<br>that <em>matter most</em></h2>
+    </div>
+    <div class="about-right reveal d1">
+      <p>I'm a product designer focused on enterprise and lab management software — where the stakes are high, workflows are complex, and good design directly impacts real people's productivity.</p>
+      <p>I work closely with developers, data teams, and end users to uncover the real problem before proposing a solution. Design without research is just guessing.</p>
+      <div class="skills-wrap">
+        <span class="skill">Figma</span>
+        <span class="skill">UX Research</span>
+        <span class="skill">Prototyping</span>
+        <span class="skill">User Interviews</span>
+        <span class="skill">Data Analysis</span>
+        <span class="skill">Workflow Design</span>
+        <span class="skill">Design Systems</span>
+        <span class="skill">Enterprise UX</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <span class="contact-label reveal">Get in touch</span>
+    <h2 class="contact-title reveal">Have a problem<br>worth <em>solving?</em></h2>
+    <a href="mailto:hello@judylee.design" class="contact-email reveal">
+      hello@judylee.design ↗
+    </a>
+    <p class="contact-note reveal d1">Open to new projects, full-time roles, and collaborations.<br>Based in Los Angeles — happy to work across time zones.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Judy Lee</span>
+    <ul class="footer-links">
+      <li><a href="https://www.judylee.design" target="_blank">Website</a></li>
+      <li><a href="#" target="_blank">LinkedIn</a></li>
+      <li><a href="#" target="_blank">Read.cv</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { io.observe(el); });
+  setTimeout(function() { els.forEach(function(el) { el.classList.add('visible'); }); }, 1000);
+</script>
+</body>
+</html>
