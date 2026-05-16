@@ -367,7 +367,7 @@
   }
   .cs-exp.chosen .cs-exp-desc { color: #3D5A7A; }
   .cs-exp-img {
-    background: var(--wl);
+    background: transparent;
     border-top: 0.5px solid var(--sand);
     overflow: hidden;
     line-height: 0;
@@ -383,7 +383,6 @@
     display: block;
     object-fit: contain;
     border-radius: 6px;
-    box-shadow: 0 2px 16px rgba(26,22,18,0.08);
   }
   .cs-exp-img-placeholder {
     height: 260px;
@@ -402,15 +401,25 @@
   .cs-features { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
   .cs-feature {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    padding: 3rem 0;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 4rem;
+    padding: 4rem 0;
     border-bottom: 0.5px solid var(--sand);
     align-items: center;
   }
   .cs-feature:first-child { border-top: 0.5px solid var(--sand); }
   .cs-feature:last-child { border-bottom: none; }
   .cs-feature.flip .cs-feature-img { order: -1; }
+  .cs-feature.flip { grid-template-columns: 1.8fr 1fr; }
+
+  /* Wide section — breaks out of the 740px content column */
+  .cs-section-wide {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   .cs-feature-num {
     font-family: var(--sans);
     font-size: 9px;
@@ -434,13 +443,11 @@
     color: #3D3835;
   }
   .cs-feature-img {
-    background: var(--wl);
+    background: transparent;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
-    border-radius: 8px;
   }
   .cs-feature-img img {
     width: 100%;
@@ -448,7 +455,6 @@
     display: block;
     object-fit: contain;
     border-radius: 6px;
-    box-shadow: 0 2px 16px rgba(26,22,18,0.08);
   }
   .cs-feature-img-placeholder {
     display: flex;
@@ -720,21 +726,6 @@
       <p>Exploration 3 won because it solved the engineering problem without creating a design problem. Users wouldn't need to relearn anything — the only visible change was a button.</p>
     </div>
 
-    <!-- Exploration images - all 3 -->
-    <div class="cs-img-grid" style="grid-template-columns:1fr 1fr 1fr;">
-      <div class="cs-img">
-        <img src="../images/carrier-rates/exploration-01.png" alt="Exploration 01">
-        <div class="cs-img-caption">01 — Radio Selection Row</div>
-      </div>
-      <div class="cs-img">
-        <img src="../images/carrier-rates/exploration-02.png" alt="Exploration 02">
-        <div class="cs-img-caption">02 — Existing Radio Group</div>
-      </div>
-      <div class="cs-img">
-        <img src="../images/carrier-rates/exploration-03.png" alt="Exploration 03">
-        <div class="cs-img-caption">03 — Keep Button Group ✓</div>
-      </div>
-    </div>
   </div>
 
   <!-- 06 Final Design -->
@@ -750,7 +741,12 @@
       <div class="cs-img-caption">Final design — user selects carrier, then triggers API with Get Rates</div>
     </div>
 
-    <div class="cs-features">
+  </div>
+</div><!-- /cs-content -->
+
+<!-- FINAL DESIGN FEATURES — wide breakout -->
+<div class="cs-section-wide">
+  <div class="cs-features">
 
       <div class="cs-feature">
         <div>
@@ -798,10 +794,11 @@
         </div>
       </div>
 
-    </div>
-  </div>
+  </div><!-- /cs-features -->
+</div><!-- /cs-section-wide -->
 
-  <!-- 07 Outcome -->
+<!-- OUTCOME -->
+<div class="cs-content">
   <div class="cs-section reveal">
     <div class="cs-section-label">07 · Outcome & Reflection</div>
     <h2 class="cs-pull">Minimal change.<br><em>Real impact.</em></h2>
@@ -811,7 +808,6 @@
       <p>What I'd do differently: I'd push for usability testing with actual lab invoicing users earlier in the process. Even a quick 3-person session would have validated the loading state design faster than internal review alone.</p>
     </div>
   </div>
-
 </div><!-- /cs-content -->
 
 <!-- NEXT CASE -->
