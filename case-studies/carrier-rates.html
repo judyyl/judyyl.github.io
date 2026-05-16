@@ -311,42 +311,43 @@
     color: var(--slate);
   }
 
-  /* Explorations — Option C style */
-  .cs-explorations { display: flex; flex-direction: column; gap: 8px; margin: 1.5rem 0; }
+  /* Explorations — 2-column, no cards */
+  .cs-explorations { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
   .cs-exp {
-    border: 0.5px solid var(--sand);
-    border-radius: 10px;
-    background: var(--white);
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 0;
+    border-bottom: 0.5px solid var(--sand);
   }
-  .cs-exp.chosen {
-    background: var(--slt);
-    border: 1.5px solid var(--slate);
-  }
+  .cs-exp:first-child { border-top: 0.5px solid var(--sand); }
+  .cs-exp:last-child { border-bottom: none; }
   .cs-exp-header {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.25rem 1.25rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
   }
   .cs-exp-num {
-    font-family: var(--serif);
-    font-size: 15px;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--slate);
-    flex-shrink: 0;
-    min-width: 20px;
-    margin-top: 2px;
+    margin-bottom: 4px;
+    display: block;
   }
   .cs-exp-content { flex: 1; }
   .cs-exp-title {
     font-family: var(--serif);
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 300;
     color: var(--obs);
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    line-height: 1.2;
   }
   .cs-exp.chosen .cs-exp-title { color: var(--sdk); }
   .cs-exp-chosen-badge {
@@ -362,27 +363,25 @@
   }
   .cs-exp-desc {
     font-size: 13px;
-    line-height: 1.8;
+    line-height: 1.85;
     color: #3D3835;
   }
   .cs-exp.chosen .cs-exp-desc { color: #3D5A7A; }
   .cs-exp-img {
     background: transparent;
-    border-top: 0.5px solid var(--sand);
     overflow: hidden;
     line-height: 0;
-    padding: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .cs-exp.chosen .cs-exp-img { border-top-color: rgba(74,114,160,0.3); }
   .cs-exp-img img {
     width: 100%;
     height: auto;
     display: block;
     object-fit: contain;
     border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(26,22,18,0.1);
   }
   .cs-exp-img-placeholder {
     height: 260px;
@@ -402,7 +401,7 @@
   .cs-feature {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 4rem 0;
     border-bottom: 0.5px solid var(--sand);
   }
@@ -410,15 +409,23 @@
   .cs-feature:last-child { border-bottom: none; }
   .cs-feature-text { max-width: 520px; }
   .cs-feature.flip .cs-feature-img { order: -1; }
+  .cs-feature-img img,
+  .cs-feature-img video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.14);
+  }
 
   /* Wide section — breaks out of the 740px content column */
   .cs-section-wide {
-    max-width: 900px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 2rem;
     padding-right: 2rem;
   }
+
   .cs-feature-num {
     font-family: var(--sans);
     font-size: 9px;
@@ -650,11 +657,11 @@
     <p class="cs-body">Working closely with the development team, we landed on a better trigger point: instead of firing all API calls on page load, the user selects a carrier first — then a single call fires for that carrier when they click "Get Rates."</p>
 
     <!-- Image placeholder - replace with your actual screenshot -->
-    <div class="cs-img">
+    <div class="cs-img" style="border:none; background:transparent;">
       <img src="../images/carrier-rates/current-flow.png" alt="Current invoicing flow"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <div class="cs-img-placeholder" style="display:none;"><p>Add current-flow.png to images/carrier-rates/</p></div>
-      <div class="cs-img-caption">Current flow — all carrier rates loaded on page open</div>
+      <div class="cs-img-caption" style="border-top:none;">Current flow — all carrier rates loaded on page open</div>
     </div>
   </div>
 
@@ -732,14 +739,6 @@
     <div class="cs-section-label">06 · Final Design</div>
     <h2 class="cs-pull">What changed,<br><em>and why it matters.</em></h2>
 
-    <!-- Final design video -->
-    <div class="cs-img">
-      <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:6px;">
-        <source src="../images/carrier-rates/final-design.mov" type="video/mp4">
-      </video>
-      <div class="cs-img-caption">Final design — user selects carrier, then triggers API with Get Rates</div>
-    </div>
-
   </div>
 </div><!-- /cs-content -->
 
@@ -754,7 +753,7 @@
           <p class="cs-feature-desc">FedEx is pre-selected on load — the most-used carrier at 60%. From there, users click "Get Rates" to trigger a single API call. Switching carriers fires a new call only for that selection, keeping costs low without hiding options. A loading state communicates progress so users always know the page is working.</p>
         </div>
         <div class="cs-feature-img">
-          <video autoplay loop muted playsinline style="width:100%;border-radius:6px;box-shadow:0 2px 16px rgba(26,22,18,0.08);">
+          <video autoplay loop muted playsinline>
             <source src="../images/carrier-rates/feature-03-trigger.mov" type="video/mp4">
           </video>
         </div>
