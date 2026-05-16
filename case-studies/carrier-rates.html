@@ -397,20 +397,19 @@
     color: var(--lg);
   }
 
-  /* Features — open two-column rows */
+  /* Features — stacked layout */
   .cs-features { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
   .cs-feature {
-    display: grid;
-    grid-template-columns: 1fr 1.8fr;
-    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     padding: 4rem 0;
     border-bottom: 0.5px solid var(--sand);
-    align-items: center;
   }
   .cs-feature:first-child { border-top: 0.5px solid var(--sand); }
   .cs-feature:last-child { border-bottom: none; }
+  .cs-feature-text { max-width: 520px; }
   .cs-feature.flip .cs-feature-img { order: -1; }
-  .cs-feature.flip { grid-template-columns: 1.8fr 1fr; }
 
   /* Wide section — breaks out of the 740px content column */
   .cs-section-wide {
@@ -749,7 +748,7 @@
   <div class="cs-features">
 
       <div class="cs-feature">
-        <div>
+        <div class="cs-feature-text">
           <span class="cs-feature-num">01</span>
           <div class="cs-feature-title">Smart default & carrier switching</div>
           <p class="cs-feature-desc">FedEx is pre-selected on load — the most-used carrier at 60%. From there, users click "Get Rates" to trigger a single API call. Switching carriers fires a new call only for that selection, keeping costs low without hiding options. A loading state communicates progress so users always know the page is working.</p>
@@ -762,7 +761,7 @@
       </div>
 
       <div class="cs-feature flip">
-        <div>
+        <div class="cs-feature-text">
           <span class="cs-feature-num">02</span>
           <div class="cs-feature-title">Other Services placement</div>
           <p class="cs-feature-desc">Moved earlier in the flow alongside package type — so users can pre-configure add-ons before requesting rates, avoiding an extra API call after the fact.</p>
@@ -784,7 +783,7 @@
       </div>
 
       <div class="cs-feature flip">
-        <div>
+        <div class="cs-feature-text">
           <span class="cs-feature-num">04</span>
           <div class="cs-feature-title">Doctor Pickup & carrier preferences</div>
           <p class="cs-feature-desc">Doctor Pickup requires no API call and loads instantly. Doctor-set carrier preferences pre-select automatically — no change in behavior for that workflow.</p>
