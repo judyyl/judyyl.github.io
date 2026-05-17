@@ -662,12 +662,11 @@
     <p class="cs-body">This data reframed the problem entirely. The current design treated every carrier equally, loading rates for all of them every time. But if FedEx covers 60% of cases, most users only ever needed one carrier's rates. We were making five calls when one would do.</p>
     <p class="cs-body">Working closely with the development team, we landed on a better trigger point: instead of firing all API calls on page load, the user selects a carrier first — then a single call fires for that carrier when they click "Get Rates."</p>
 
-    <!-- Image placeholder - replace with your actual screenshot -->
     <div class="cs-img" style="border:none; background:transparent;">
-      <img src="../images/carrier-rates/current-flow.png" alt="Current invoicing flow"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-      <div class="cs-img-placeholder" style="display:none;"><p>Add current-flow.png to images/carrier-rates/</p></div>
-      <div class="cs-img-caption" style="border-top:none;">Current flow — all carrier rates loaded on page open</div>
+      <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:8px;">
+        <source src="../images/carrier-rates/current-flow.mp4" type="video/mp4">
+      </video>
+      <div class="cs-img-caption" style="border-top:none;">Before — all carrier rates loaded on page open</div>
     </div>
   </div>
 
@@ -744,7 +743,11 @@
   <div class="cs-section reveal">
     <div class="cs-section-label">06 · Final Design</div>
     <h2 class="cs-pull">What changed,<br><em>and why it matters.</em></h2>
-
+    <div class="cs-img" style="border:none; background:transparent;">
+      <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:8px;">
+        <source src="../images/carrier-rates/final-design.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </div><!-- /cs-content -->
 
