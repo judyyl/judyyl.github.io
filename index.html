@@ -220,7 +220,7 @@
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--slate);
+    color: var(--wg);
     margin-bottom: 3rem;
   }
   .section-label::after {
@@ -256,43 +256,40 @@
   .project-list {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    border-top: 1px solid var(--sand);
+    gap: 5rem;
+    padding-top: 1rem;
   }
+
   .project-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 0;
-    border-bottom: 1px solid var(--sand);
     text-decoration: none;
     color: inherit;
-    transition: background 0.3s;
-    min-height: 320px;
+    cursor: pointer;
   }
-  .project-item:hover { background: var(--wl); }
-  .project-item.reverse { direction: rtl; }
-  .project-item.reverse > * { direction: ltr; }
 
   .project-img {
     background: var(--wl);
     position: relative;
     overflow: hidden;
-    min-height: 320px;
+    width: 100%;
+    border-radius: 8px;
+    line-height: 0;
   }
   .project-img img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
+    object-fit: contain;
     transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
-    opacity: 0.9;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.1), 0 2px 12px rgba(26,22,18,0.06);
   }
-  .project-item:hover .project-img img { transform: scale(1.03); }
+  .project-item:hover .project-img img { transform: scale(1.02); }
 
   /* Placeholder when no image */
   .project-img-placeholder {
-    position: absolute;
-    inset: 0;
+    height: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -314,29 +311,27 @@
   }
 
   .project-info {
-    padding: 3rem;
+    padding: 1.5rem 0 0;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    border-left: 1px solid var(--sand);
+    align-items: flex-end;
+    gap: 2rem;
   }
-  .project-item.reverse .project-info {
-    border-left: none;
-    border-right: 1px solid var(--sand);
-  }
+  .project-info-left { flex: 1; }
   .project-tag {
     font-size: 9px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--slate);
-    margin-bottom: 1rem;
+    color: var(--wg);
+    margin-bottom: 0.5rem;
+    display: block;
   }
   .project-name {
     font-family: var(--serif);
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
     font-weight: 300;
     line-height: 1.1;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     transition: color 0.2s;
   }
   .project-item:hover .project-name { color: var(--slate); }
@@ -344,30 +339,22 @@
     font-size: 12px;
     line-height: 1.8;
     color: var(--wg);
-    margin-bottom: 2rem;
+    max-width: 560px;
   }
-  .project-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  .project-year {
-    font-family: var(--serif);
-    font-size: 11px;
-    color: var(--lg);
-    letter-spacing: 0.1em;
-  }
-  .project-arrow {
-    font-size: 18px;
+  .project-cta {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--slate);
+    border-bottom: 1px solid var(--slate);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
     opacity: 0;
-    transform: translate(-4px, 4px);
-    transition: opacity 0.3s, transform 0.3s;
+    align-self: flex-end;
   }
-  .project-item:hover .project-arrow {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
+  .project-item:hover .project-cta { opacity: 1; }
 
   /* ── ABOUT ── */
   .about-section { background: var(--obs); color: var(--linen); }
@@ -432,7 +419,7 @@
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--slate);
+    color: var(--wg);
     margin-bottom: 1.5rem;
     display: block;
   }
@@ -526,9 +513,8 @@
     </a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="mailto:hello@judylee.design" class="nav-cta">Hire me</a></li>
     </ul>
   </div>
 </nav>
@@ -567,7 +553,6 @@
       <!-- Project 01 -->
       <a class="project-item reveal" href="case-studies/carrier-rates.html">
         <div class="project-img">
-          <!-- Replace src with your actual image -->
           <img src="images/carrier-rates/cover.png" alt="Invoicing Carrier Rates Redesign"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="project-img-placeholder" style="display:none;">
@@ -576,20 +561,17 @@
           </div>
         </div>
         <div class="project-info">
-          <div>
-            <p class="project-tag">Lab Management System · UX Redesign</p>
-            <h3 class="project-name">Invoicing: Carrier<br>Rates Redesign</h3>
+          <div class="project-info-left">
+            <span class="project-tag">Lab Management System · UX Redesign · 2024</span>
+            <h3 class="project-name">Invoicing: Carrier Rates Redesign</h3>
             <p class="project-desc">One design change. 91.66% fewer API calls. Zero disruption to users.</p>
           </div>
-          <div class="project-meta">
-            <span class="project-year">2024</span>
-            <span class="project-arrow">↗</span>
-          </div>
+          <span class="project-cta">View case study →</span>
         </div>
       </a>
 
       <!-- Project 02 -->
-      <a class="project-item reverse reveal d1" href="case-studies/related-cases.html">
+      <a class="project-item reveal d1" href="case-studies/related-cases.html">
         <div class="project-img">
           <img src="images/related-cases/cover.png" alt="Related Cases Return Entry Redesign"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -599,15 +581,12 @@
           </div>
         </div>
         <div class="project-info">
-          <div>
-            <p class="project-tag">Lab Management System · Return Workflow</p>
-            <h3 class="project-name">Related Cases:<br>Return Entry Redesign</h3>
+          <div class="project-info-left">
+            <span class="project-tag">Lab Management System · Return Workflow · 2024</span>
+            <h3 class="project-name">Related Cases: Return Entry Redesign</h3>
             <p class="project-desc">Inherited a shelved solution, a hard deadline, and a team expecting the impossible. Here's what shipped.</p>
           </div>
-          <div class="project-meta">
-            <span class="project-year">2024</span>
-            <span class="project-arrow">↗</span>
-          </div>
+          <span class="project-cta">View case study →</span>
         </div>
       </a>
 
@@ -622,42 +601,15 @@
           </div>
         </div>
         <div class="project-info">
-          <div>
-            <p class="project-tag">Lead Management · Dashboard Design</p>
-            <h3 class="project-name">Multiple Queues:<br>One Dashboard, Every Lead.</h3>
+          <div class="project-info-left">
+            <span class="project-tag">Lead Management · Dashboard Design · 2022</span>
+            <h3 class="project-name">Multiple Queues: One Dashboard, Every Lead</h3>
             <p class="project-desc">No direct user access. No clear requirements. Just a hard deadline and a client who needed something that didn't exist yet.</p>
           </div>
-          <div class="project-meta">
-            <span class="project-year">2022</span>
-            <span class="project-arrow">↗</span>
-          </div>
+          <span class="project-cta">View case study →</span>
         </div>
       </a>
 
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="section about-section" id="about">
-  <div class="about-inner">
-    <div class="about-left reveal">
-      <span class="about-label">About</span>
-      <h2>Designing for<br>the workflows<br>that <em>matter most</em></h2>
-    </div>
-    <div class="about-right reveal d1">
-      <p>I'm a product designer focused on enterprise and lab management software — where the stakes are high, workflows are complex, and good design directly impacts real people's productivity.</p>
-      <p>I work closely with developers, data teams, and end users to uncover the real problem before proposing a solution. Design without research is just guessing.</p>
-      <div class="skills-wrap">
-        <span class="skill">Figma</span>
-        <span class="skill">UX Research</span>
-        <span class="skill">Prototyping</span>
-        <span class="skill">User Interviews</span>
-        <span class="skill">Data Analysis</span>
-        <span class="skill">Workflow Design</span>
-        <span class="skill">Design Systems</span>
-        <span class="skill">Enterprise UX</span>
-      </div>
     </div>
   </div>
 </section>

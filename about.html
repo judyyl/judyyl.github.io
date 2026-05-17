@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Judy Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --linen:  #FEFCF9;
+    --wl:     #F3EEE6;
+    --sand:   #D9C9B0;
+    --wg:     #6B6560;
+    --lg:     #C4BDB6;
+    --slt:    #EAF1F8;
+    --smid:   #8AAAC8;
+    --slate:  #4A72A0;
+    --sdk:    #1E3448;
+    --obs:    #1A1612;
+    --white:  #FFFFFF;
+    --max:    960px;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --sans:   'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--linen);
+    color: var(--obs);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(254,252,249,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+  }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--obs);
+    line-height: 1;
+  }
+  .nav-logo-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--slate);
+    margin-top: 4px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--wg);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--obs); }
+  .nav-links a.active { color: var(--obs); }
+
+  /* PAGE */
+  .page {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 120px 2rem 6rem;
+  }
+
+  /* HEADER */
+  .about-header {
+    border-bottom: 1px solid var(--sand);
+    padding-bottom: 3rem;
+    margin-bottom: 4rem;
+  }
+  .about-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wg);
+    display: block;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  .about-title {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .about-title em { font-style: italic; color: var(--slate); }
+
+  /* MAIN GRID */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 5rem;
+    align-items: start;
+    margin-bottom: 5rem;
+  }
+
+  /* LEFT COL */
+  .about-photo {
+    position: sticky;
+    top: 100px;
+  }
+  .about-photo-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--wl);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-photo-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .about-photo-placeholder p {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+    text-align: center;
+  }
+  .about-meta { display: flex; flex-direction: column; gap: 0.75rem; }
+  .about-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--sand);
+  }
+  .about-meta-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--wg);
+  }
+  .about-meta-val {
+    font-size: 13px;
+    color: var(--obs);
+    line-height: 1.5;
+  }
+
+  /* RIGHT COL */
+  .about-content {}
+  .about-section { margin-bottom: 3.5rem; }
+  .about-section:last-child { margin-bottom: 0; }
+  .about-section-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wg);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .about-section-label::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--slate);
+    flex-shrink: 0;
+  }
+  .about-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+  .about-section h2 em { font-style: italic; color: var(--slate); }
+  .about-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #3D3835;
+    margin-bottom: 1rem;
+  }
+  .about-body:last-child { margin-bottom: 0; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--sand);
+    border: 1px solid var(--sand);
+    margin-top: 1.5rem;
+  }
+  .skill-item {
+    background: var(--white);
+    padding: 0.75rem 1rem;
+    font-size: 12px;
+    color: #3D3835;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .skill-item::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--slate);
+    flex-shrink: 0;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--sand);
+    align-items: start;
+  }
+  .exp-item:first-child { border-top: 1px solid var(--sand); }
+  .exp-role {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 3px;
+  }
+  .exp-company {
+    font-size: 12px;
+    color: var(--wg);
+  }
+  .exp-year {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--wg);
+    letter-spacing: 0.04em;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* CTA */
+  .about-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--obs);
+    text-decoration: none;
+    border-bottom: 1px solid var(--obs);
+    padding-bottom: 3px;
+    margin-top: 2rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .about-cta:hover { color: var(--slate); border-color: var(--slate); }
+
+  /* FOOTER */
+  footer {
+    background: var(--obs);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .footer-inner {
+    max-width: var(--max);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-family: var(--serif);
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(254,252,249,0.3);
+  }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(254,252,249,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--smid); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">JL</span>
+      <span class="nav-logo-rule"></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="about-header">
+    <span class="about-eyebrow">About</span>
+    <h1 class="about-title">Judy <em>Lee</em></h1>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="about-grid">
+
+    <!-- LEFT — photo + meta -->
+    <div class="about-photo">
+      <div class="about-photo-img">
+        <!-- Add your photo: about-photo.png -->
+        <img src="images/about-photo.png" alt="Judy Lee"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="about-photo-placeholder" style="display:none;">
+          <p>Add about-photo.png<br>to images/</p>
+        </div>
+      </div>
+      <div class="about-meta">
+        <div class="about-meta-item">
+          <span class="about-meta-label">Based in</span>
+          <span class="about-meta-val">Orange County, CA</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label">Currently</span>
+          <span class="about-meta-val">Lead Product Designer at EKN</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label">Status</span>
+          <span class="about-meta-val" style="color:var(--slate);">Open to new opportunities</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label">Contact</span>
+          <span class="about-meta-val">
+            <a href="mailto:judylee791@gmail.com" style="color:var(--slate); text-decoration:none;">judylee791@gmail.com</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — content -->
+    <div class="about-content">
+
+      <div class="about-section reveal">
+        <div class="about-section-label">Who I am</div>
+        <h2>Designing for the workflows<br>that <em>matter most</em></h2>
+        <p class="about-body">I'm a product designer focused on enterprise and lab management software — where the stakes are high, workflows are complex, and good design directly impacts real people's productivity and livelihoods.</p>
+        <p class="about-body">I work closely with developers, data teams, and end users to uncover the real problem before proposing a solution. Design without research is just guessing.</p>
+        <p class="about-body">A recurring theme in my career: being brought into complex, inherited work and quickly orienting to identify gaps, drive progress, and align stakeholders. I've grown comfortable in ambiguity — and I've learned that the best designs often come from asking the right questions, not having the right answers upfront.</p>
+      </div>
+
+      <div class="about-section reveal d1">
+        <div class="about-section-label">Skills</div>
+        <div class="skills-grid">
+          <div class="skill-item">Figma</div>
+          <div class="skill-item">UX Research</div>
+          <div class="skill-item">Prototyping</div>
+          <div class="skill-item">User Interviews</div>
+          <div class="skill-item">Data Analysis</div>
+          <div class="skill-item">Workflow Design</div>
+          <div class="skill-item">Design Systems</div>
+          <div class="skill-item">Enterprise UX</div>
+          <div class="skill-item">Usability Testing</div>
+          <div class="skill-item">Cross-functional Collaboration</div>
+        </div>
+      </div>
+
+      <div class="about-section reveal d2">
+        <div class="about-section-label">Experience</div>
+        <div class="exp-list">
+          <div class="exp-item">
+            <div>
+              <div class="exp-role">Lead Product Designer</div>
+              <div class="exp-company">EKN</div>
+            </div>
+            <div class="exp-year">2025 — Present</div>
+          </div>
+          <div class="exp-item">
+            <div>
+              <div class="exp-role">Senior Product Designer</div>
+              <div class="exp-company">Glidewell Dental</div>
+            </div>
+            <div class="exp-year">Jan 2023 — Apr 2025</div>
+          </div>
+          <div class="exp-item">
+            <div>
+              <div class="exp-role">Product Designer</div>
+              <div class="exp-company">Loyal Health</div>
+            </div>
+            <div class="exp-year">Feb 2022 — Dec 2022</div>
+          </div>
+          <div class="exp-item">
+            <div>
+              <div class="exp-role">Product Designer</div>
+              <div class="exp-company">ZUUM Transportation</div>
+            </div>
+            <div class="exp-year">Mar 2020 — Feb 2022</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-section reveal">
+        <div class="about-section-label">Get in touch</div>
+        <p class="about-body">Open to new projects, full-time roles, and collaborations. If you're looking for a designer who can orient quickly, ask the right questions, and ship thoughtful work — let's talk.</p>
+        <a href="mailto:judylee791@gmail.com" class="about-cta">judylee791@gmail.com ↗</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Judy Lee</span>
+    <ul class="footer-links">
+      <li><a href="https://www.judylee.design" target="_blank">Website</a></li>
+      <li><a href="#" target="_blank">LinkedIn</a></li>
+      <li><a href="#" target="_blank">Read.cv</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { io.observe(el); });
+  setTimeout(function() { els.forEach(function(el) { el.classList.add('visible'); }); }, 800);
+</script>
+</body>
+</html>
