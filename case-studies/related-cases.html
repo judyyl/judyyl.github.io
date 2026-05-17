@@ -164,15 +164,16 @@
   }
   .cs-meta-val { font-size: 13px; color: var(--obs); }
 
-  /* COVER IMAGE — no container */
+  /* COVER — full-width video */
   .cs-cover {
-    overflow: visible;
+    overflow: hidden;
     line-height: 0;
-    padding: 3rem 2rem 6rem;
-    max-width: 900px;
+    padding: 3rem 2rem;
+    max-width: 1000px;
     margin: 0 auto;
   }
-  .cs-cover img {
+  .cs-cover img,
+  .cs-cover video {
     width: 100%;
     display: block;
     margin: 0 auto;
@@ -321,19 +322,18 @@
     font-weight: 500;
   }
 
-  /* Explorations — same as carrier rates */
+  /* Explorations — stacked, full-width video */
   .cs-explorations { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
   .cs-exp {
-    display: grid;
-    grid-template-columns: 1fr 2.5fr;
-    gap: 3rem;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     padding: 3rem 0;
     border-bottom: 0.5px solid var(--sand);
   }
   .cs-exp:first-child { border-top: 0.5px solid var(--sand); }
   .cs-exp:last-child { border-bottom: none; }
-  .cs-exp-header { display: flex; flex-direction: column; gap: 0.5rem; }
+  .cs-exp-header { display: flex; flex-direction: column; gap: 0.5rem; max-width: 520px; }
   .cs-exp-num {
     font-family: var(--sans);
     font-size: 9px;
@@ -599,12 +599,11 @@
   </div>
 </div>
 
-<!-- COVER IMAGE -->
+<!-- COVER VIDEO -->
 <div class="cs-cover">
-  <img src="../images/related-cases/cover.png" alt="Related Cases — Return Entry Redesign">
-  <div class="cs-cover-placeholder" style="display:none;">
-    <p>Add cover.png to images/related-cases/</p>
-  </div>
+  <video autoplay loop muted playsinline>
+    <source src="../images/related-cases/cover.mp4" type="video/mp4">
+  </video>
 </div>
 
 <!-- CONTENT -->
@@ -694,7 +693,7 @@
           </div>
         </div>
         <div class="cs-exp-img">
-          <video autoplay loop muted playsinline style="width:100%;border-radius:6px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+          <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:8px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
             <source src="../images/related-cases/exploration-01.mp4" type="video/mp4">
           </video>
         </div>
@@ -708,7 +707,7 @@
           </div>
         </div>
         <div class="cs-exp-img">
-          <video autoplay loop muted playsinline style="width:100%;border-radius:6px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+          <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:8px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
             <source src="../images/related-cases/exploration-02.mp4" type="video/mp4">
           </video>
         </div>
@@ -725,7 +724,7 @@
           </div>
         </div>
         <div class="cs-exp-img">
-          <video autoplay loop muted playsinline style="width:100%;border-radius:6px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+          <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:8px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
             <source src="../images/related-cases/exploration-03.mp4" type="video/mp4">
           </video>
         </div>
