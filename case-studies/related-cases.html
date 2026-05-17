@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Related Cases: Return Entry Redesign — Judy Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --linen:  #FEFCF9;
+    --wl:     #F3EEE6;
+    --sand:   #D9C9B0;
+    --wg:     #6B6560;
+    --lg:     #C4BDB6;
+    --slt:    #EAF1F8;
+    --smid:   #8AAAC8;
+    --slate:  #4A72A0;
+    --sdeep:  #2E557A;
+    --sdk:    #1E3448;
+    --obs:    #1A1612;
+    --white:  #FFFFFF;
+    --max:    740px;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --sans:   'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--linen);
+    color: var(--obs);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(254,252,249,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+  }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--obs);
+    line-height: 1;
+  }
+  .nav-logo-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--slate);
+    margin-top: 4px;
+  }
+  .nav-back {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--wg);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--slate); }
+
+  /* HERO */
+  .cs-hero {
+    background: var(--sdk);
+    padding: 120px 2rem 80px;
+    text-align: center;
+  }
+  .cs-hero-inner { max-width: var(--max); margin: 0 auto; }
+  .cs-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--smid);
+    margin-bottom: 2rem;
+    display: block;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+  .cs-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--linen);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .cs-title em { font-style: italic; color: var(--smid); }
+  .cs-tagline {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(254,252,249,0.5);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 1s ease 0.35s both;
+  }
+  .cs-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+  .cs-tag {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--smid);
+    border: 1px solid rgba(138,170,200,0.3);
+    padding: 4px 12px;
+  }
+
+  /* META ROW */
+  .cs-meta {
+    background: var(--white);
+    border-bottom: 1px solid var(--sand);
+  }
+  .cs-meta-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cs-meta-item {
+    padding: 1.25rem 1.5rem;
+    border-right: 1px solid var(--sand);
+  }
+  .cs-meta-item:last-child { border-right: none; }
+  .cs-meta-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--wg);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cs-meta-val { font-size: 13px; color: var(--obs); }
+
+  /* COVER IMAGE — no container */
+  .cs-cover {
+    overflow: visible;
+    line-height: 0;
+    padding: 3rem 2rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .cs-cover img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-cover-placeholder {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wl);
+    border-radius: 8px;
+  }
+  .cs-cover-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  /* CONTENT */
+  .cs-content {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Sections */
+  .cs-section { padding: 4rem 0; border-bottom: 1px solid var(--sand); }
+  .cs-section:last-child { border-bottom: none; }
+
+  .cs-section-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .cs-section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--slate);
+    flex-shrink: 0;
+  }
+
+  .cs-pull {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .cs-pull em { font-style: italic; color: var(--slate); }
+
+  .cs-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #3D3835;
+    margin-bottom: 1rem;
+  }
+  .cs-body:last-child { margin-bottom: 0; }
+  .cs-body strong { color: var(--obs); font-weight: 500; }
+
+  /* Callout */
+  .cs-callout {
+    border-left: 2px solid var(--slate);
+    background: var(--slt);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .cs-callout p {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--sdk);
+  }
+  .cs-callout.warm {
+    background: var(--wl);
+    border-color: var(--slate);
+  }
+  .cs-callout.warm p { color: #3D3835; font-style: normal; font-size: 14px; line-height: 1.85; }
+
+  /* Bullets */
+  .cs-bullets { margin: 1rem 0; padding: 0; list-style: none; }
+  .cs-bullets li {
+    font-size: 14px;
+    line-height: 1.85;
+    color: #3D3835;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    position: relative;
+    border-bottom: 1px solid var(--sand);
+  }
+  .cs-bullets li:first-child { border-top: 1px solid var(--sand); }
+  .cs-bullets li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--slate);
+  }
+
+  /* Challenge items */
+  .cs-challenges { display: flex; flex-direction: column; gap: 1.5rem; margin: 1.5rem 0; }
+  .cs-challenge {
+    padding: 1.5rem;
+    background: var(--white);
+    border-left: 2px solid var(--slate);
+  }
+  .cs-challenge-num {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .cs-challenge-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 8px;
+  }
+  .cs-challenge-problem {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #3D3835;
+    margin-bottom: 10px;
+  }
+  .cs-challenge-action {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #3D3835;
+  }
+  .cs-challenge-action strong {
+    color: var(--obs);
+    font-weight: 500;
+  }
+
+  /* Explorations — same as carrier rates */
+  .cs-explorations { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .cs-exp {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 0;
+    border-bottom: 0.5px solid var(--sand);
+  }
+  .cs-exp:first-child { border-top: 0.5px solid var(--sand); }
+  .cs-exp:last-child { border-bottom: none; }
+  .cs-exp-header { display: flex; flex-direction: column; gap: 0.5rem; }
+  .cs-exp-num {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .cs-exp-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1.2;
+  }
+  .cs-exp.chosen .cs-exp-title { color: var(--sdk); }
+  .cs-exp-chosen-badge {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+    background: var(--white);
+    border: 0.5px solid var(--slate);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .cs-exp-desc {
+    font-size: 13px;
+    line-height: 1.85;
+    color: #3D3835;
+  }
+  .cs-exp.chosen .cs-exp-desc { color: #3D5A7A; }
+  .cs-exp-img {
+    background: transparent;
+    overflow: visible;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .cs-exp-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-exp-img-placeholder {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wl);
+    border-radius: 6px;
+    width: 100%;
+  }
+  .cs-exp-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  /* Inline image — no background */
+  .cs-img-free {
+    margin: 2rem 0;
+    overflow: visible;
+    line-height: 0;
+  }
+  .cs-img-free img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-img-free-placeholder {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wl);
+    border-radius: 8px;
+  }
+  .cs-img-free-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+  .cs-img-caption {
+    font-size: 11px;
+    color: var(--lg);
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 0.75rem 0 0;
+    line-height: 1.5;
+  }
+
+  /* Wide section breakout */
+  .cs-section-wide {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+    overflow: visible;
+  }
+
+  /* Features — image top, text bottom */
+  .cs-features { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .cs-feature {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 4rem 0;
+    border-bottom: 0.5px solid var(--sand);
+  }
+  .cs-feature:first-child { border-top: 0.5px solid var(--sand); }
+  .cs-feature:last-child { border-bottom: none; }
+  .cs-feature-text { max-width: 520px; order: 2; }
+  .cs-feature-img { order: 1; }
+  .cs-feature-num {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .cs-feature-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .cs-feature-desc {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #3D3835;
+  }
+  .cs-feature-img {
+    background: transparent;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .cs-feature-img img,
+  .cs-feature-img video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-feature-img-placeholder {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wl);
+    border-radius: 8px;
+    width: 100%;
+  }
+  .cs-feature-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  /* Next case */
+  .cs-next {
+    background: var(--sdk);
+    padding: 4rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: background 0.3s;
+  }
+  .cs-next:hover { background: var(--obs); }
+  .cs-next-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--smid);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .cs-next-title {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 300;
+    color: var(--linen);
+    display: block;
+  }
+  .cs-next-title em { font-style: italic; color: var(--smid); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-text">JL</span>
+      <span class="nav-logo-rule"></span>
+    </a>
+    <a href="../index.html#work" class="nav-back">← All work</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <span class="cs-eyebrow">Lab Management System · Glidewell Dental · 2024</span>
+    <h1 class="cs-title">Related Cases:<br><em>Return Entry</em><br>Redesign</h1>
+    <p class="cs-tagline">Inherited a shelved solution, a hard deadline, and a team expecting the impossible. Here's what shipped.</p>
+    <div class="cs-tags">
+      <span class="cs-tag">Product Design</span>
+      <span class="cs-tag">UX Research</span>
+      <span class="cs-tag">Enterprise</span>
+    </div>
+  </div>
+</section>
+
+<!-- META -->
+<div class="cs-meta">
+  <div class="cs-meta-inner">
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Role</span>
+      <span class="cs-meta-val">Product Designer</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Company</span>
+      <span class="cs-meta-val">Glidewell Dental</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Year</span>
+      <span class="cs-meta-val">2024</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Platform</span>
+      <span class="cs-meta-val">Web — LMS</span>
+    </div>
+  </div>
+</div>
+
+<!-- COVER IMAGE -->
+<div class="cs-cover">
+  <img src="../images/related-cases/cover.png" alt="Related Cases — Return Entry Redesign">
+  <div class="cs-cover-placeholder" style="display:none;">
+    <p>Add cover.png to images/related-cases/</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="cs-content">
+
+  <!-- 01 Context -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">01 · Context & My Role</div>
+    <h2 class="cs-pull">I inherited a complex<br><em>problem in motion.</em></h2>
+    <p class="cs-body">The Lab Management System is an internal application built to replace two outdated legacy systems used to manage and track dental restoration cases across the lab. I was brought in to take over one of Glidewell's largest ongoing initiatives.</p>
+    <p class="cs-body">Before my arrival, the UX team had explored improving the return entry workflow — specifically, shifting return initiation from internal data-entry users to the customers themselves (dentists). They conducted research and built a robust solution. But with other priorities taking over, the feature was put on hold indefinitely.</p>
+    <p class="cs-body">When I joined, the deadline was approaching fast. The original scope was no longer feasible. My job was to revisit the shelved work, understand what was still valid, and redesign a scoped version that could actually ship.</p>
+  </div>
+
+  <!-- 02 Goal -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">02 · Goal</div>
+    <h2 class="cs-pull">Scope it down.<br><em>Ship it right.</em></h2>
+    <p class="cs-body">Redesign the return process to support data-entry users in manually entering returns at case entry — maintaining a familiar workflow from the legacy system while adapting it for the new LMS platform.</p>
+  </div>
+
+  <!-- 03 Research -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">03 · Research</div>
+    <h2 class="cs-pull">I had the least context<br>on the team. So I<br><em>went and got it.</em></h2>
+    <p class="cs-body">As the newest member, I had the least familiarity with both the business and the design work that came before me. Rather than guess, I took the initiative to fill that gap directly.</p>
+    <p class="cs-body">I reached out to stakeholders across departments and arranged a full lab walkthrough — observing how teams actually used the legacy systems, how they handled returns, and where the friction points were.</p>
+    <ul class="cs-bullets">
+      <li>Walkthrough of the legacy system and current return handling process</li>
+      <li>Ethnographic study — observing data-entry users in their actual workflow</li>
+      <li>Review of the previous team's research and shelved design solution</li>
+    </ul>
+    <p class="cs-body">After gathering my notes, I analyzed the current process and pain points side by side with the previous team's work — understanding what had already been solved well, what needed to be reconsidered, and what constraints I was actually designing within.</p>
+
+    <!-- Legacy system screenshot -->
+    <div class="cs-img-free" style="margin-top:2rem;">
+      <img src="../images/related-cases/legacy-system.png" alt="Legacy system walkthrough"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="cs-img-free-placeholder" style="display:none;"><p>Add legacy-system.png to images/related-cases/</p></div>
+      <p class="cs-img-caption">One of the legacy systems — the starting point for understanding the existing workflow</p>
+    </div>
+  </div>
+
+  <!-- 04 Key Insight -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">04 · Key Insight</div>
+    <h2 class="cs-pull">The familiar path<br>was the <em>right path.</em></h2>
+    <div class="cs-callout">
+      <p>Linking cases wasn't just a technical requirement — it was a familiar anchor. Replicating the legacy system's case-linking pattern would help data-entry users transition to the new platform without losing the muscle memory they'd built over years.</p>
+    </div>
+    <p class="cs-body">A key component of creating returns is the ability to link related cases — a capability that had to be supported at case entry, just as it was in the legacy system. What started as a functional requirement became a hidden win: preserving a familiar interaction pattern gave users something recognizable in an otherwise new environment.</p>
+  </div>
+
+  <!-- 05 Challenges -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">05 · Challenges</div>
+    <h2 class="cs-pull">What made this hard,<br>and what I did<br><em>about it.</em></h2>
+    <div class="cs-challenges">
+      <div class="cs-challenge">
+        <span class="cs-challenge-num">01</span>
+        <div class="cs-challenge-title">Taking on a complex problem with little business knowledge</div>
+        <p class="cs-challenge-problem">As the newest member of the team, I had limited understanding of the business and almost no familiarity with the design work done before my arrival. Getting up to speed quickly wasn't optional — the deadline was already close.</p>
+        <p class="cs-challenge-action"><strong>What I did:</strong> I connected with stakeholders directly to gain business context, and collaborated with fellow designers to review previous documentation and design decisions. The time investment gave me the foundation I needed to make informed decisions rather than assumptions.</p>
+      </div>
+      <div class="cs-challenge">
+        <span class="cs-challenge-num">02</span>
+        <div class="cs-challenge-title">Designing for MVP with significant constraints</div>
+        <p class="cs-challenge-problem">Replacing a robust legacy system with an MVP is never straightforward — especially when the business workflow is complex and edge cases are everywhere. The scope had already been cut once, and I was designing within what remained.</p>
+        <p class="cs-challenge-action"><strong>What I did:</strong> I kept the first release in perspective: it's a starting point, not a final answer. I communicated regularly with engineers to align on what was technically feasible, making deliberate compromises that didn't close the door on future improvements.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 Explorations -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">06 · Explorations</div>
+    <h2 class="cs-pull">Three structures.<br><em>One familiar answer.</em></h2>
+    <p class="cs-body">I explored three approaches for surfacing related cases within the case entry flow, each balancing visibility, familiarity, and the complexity of the information being presented.</p>
+
+    <div class="cs-explorations">
+      <div class="cs-exp">
+        <div class="cs-exp-header">
+          <span class="cs-exp-num">01</span>
+          <div class="cs-exp-content">
+            <div class="cs-exp-title">Banner Notification</div>
+            <p class="cs-exp-desc">A color-coded banner alerts users when related cases are found, with a modal to view details. Familiar and space-efficient — but easy to miss, and the extra click to surface details adds friction.</p>
+          </div>
+        </div>
+        <div class="cs-exp-img">
+          <video autoplay loop muted playsinline style="width:100%;border-radius:6px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+            <source src="../images/related-cases/exploration-01.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="cs-exp">
+        <div class="cs-exp-header">
+          <span class="cs-exp-num">02</span>
+          <div class="cs-exp-content">
+            <div class="cs-exp-title">Side Panel Selection</div>
+            <p class="cs-exp-desc">All related cases displayed persistently in a side panel — no extra click required. More visible, but potentially overwhelming with a high volume of related cases and limited by side panel functionality.</p>
+          </div>
+        </div>
+        <div class="cs-exp-img">
+          <video autoplay loop muted playsinline style="width:100%;border-radius:6px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+            <source src="../images/related-cases/exploration-02.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="cs-exp chosen">
+        <div class="cs-exp-header">
+          <span class="cs-exp-num">03</span>
+          <div class="cs-exp-content">
+            <div class="cs-exp-title">
+              Side Panel + Modal Hybrid
+              <span class="cs-exp-chosen-badge">Chosen</span>
+            </div>
+            <p class="cs-exp-desc">Related cases shown in the side panel for easy scanning, with a modal for focused detail review when needed. Most similar to the legacy system workflow — familiar and scalable.</p>
+          </div>
+        </div>
+        <div class="cs-exp-img">
+          <video autoplay loop muted playsinline style="width:100%;border-radius:6px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+            <source src="../images/related-cases/exploration-03.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>Exploration 3 won because it matched how users already worked. In a new system full of unfamiliar patterns, giving users one familiar anchor reduced cognitive load and eased the transition.</p>
+    </div>
+
+    <div class="cs-img-free" style="margin-top:2rem;">
+      <img src="../images/related-cases/detail-sidepanel.png" alt="Related Cases Side Panel detail"
+        style="width:100%;border-radius:8px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+      <p class="cs-img-caption">Related cases side panel — surfacing linked cases by account and provider</p>
+    </div>
+
+    <div class="cs-img-free" style="margin-top:1.5rem;">
+      <img src="../images/related-cases/detail-modal.png" alt="Modal detail view"
+        style="width:100%;border-radius:8px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+      <p class="cs-img-caption">Modal view — focused verification before linking the case</p>
+    </div>
+  </div>
+
+  <!-- 07 Final Design label -->
+  <div class="cs-section reveal" style="border-bottom:none; padding-bottom:0;">
+    <div class="cs-section-label">07 · Final Design</div>
+    <h2 class="cs-pull">What shipped, and why<br><em>each decision mattered.</em></h2>
+  </div>
+
+</div><!-- /cs-content -->
+
+<!-- FINAL DESIGN FEATURES — wide breakout -->
+<div class="cs-section-wide">
+  <div class="cs-features">
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">01</span>
+        <div class="cs-feature-title">Related Cases Side Panel</div>
+        <p class="cs-feature-desc">Related cases surface automatically based on account number and provider number, with filtering by product. Users can scan the full list without leaving the case entry flow — no additional clicks required to see what's there.</p>
+      </div>
+      <div class="cs-feature-img">
+        <img src="../images/related-cases/feature-01-panel.png" alt="Related Cases Side Panel"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cs-feature-img-placeholder" style="display:none;"><p>feature-01-panel.png</p></div>
+      </div>
+    </div>
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">02</span>
+        <div class="cs-feature-title">Detail Modal for Verification</div>
+        <p class="cs-feature-desc">Selecting a case opens a focused modal for reviewing the specific information needed to confirm the correct case. Users can select one or more products as needed — built to scale with planned enhancements without requiring a structural overhaul.</p>
+      </div>
+      <div class="cs-feature-img">
+        <img src="../images/related-cases/feature-02-modal.png" alt="Detail Modal"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cs-feature-img-placeholder" style="display:none;"><p>feature-02-modal.png</p></div>
+      </div>
+    </div>
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">03</span>
+        <div class="cs-feature-title">Pre-populated Case Details</div>
+        <p class="cs-feature-desc">Once a case is linked, relevant information from the original case carries over automatically — reducing manual input and the risk of data-entry errors. A RMA prefix is applied to the case number to track return cases and maintain a clear link to the original.</p>
+      </div>
+      <div class="cs-feature-img">
+        <img src="../images/related-cases/feature-03-prepopulate.png" alt="Pre-populated Case Details"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cs-feature-img-placeholder" style="display:none;"><p>feature-03-prepopulate.png</p></div>
+      </div>
+    </div>
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">04</span>
+        <div class="cs-feature-title">Color-coded Return Type Banners</div>
+        <p class="cs-feature-desc">Different return types are distinguished by clearly color-coded banners, making it easy for data-entry users to identify and switch between return types without confusion. Each type is visually distinct and immediately recognizable.</p>
+      </div>
+      <div class="cs-feature-img">
+        <video autoplay loop muted playsinline>
+          <source src="../images/related-cases/feature-04-banners.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OUTCOME -->
+<div class="cs-content">
+  <div class="cs-section reveal" style="border-top:1px solid var(--sand);">
+    <div class="cs-section-label">08 · Outcome & Reflection</div>
+    <h2 class="cs-pull">A scoped solution<br>that <em>held its ground.</em></h2>
+    <p class="cs-body">The redesigned return entry workflow shipped as part of the LMS MVP — giving data-entry users a familiar, functional process in a new system. The case-linking pattern from the legacy system carried over intact, the side panel reduced friction for high-volume users, and the RMA prefix laid the groundwork for future customer-initiated returns.</p>
+    <p class="cs-body">The design didn't solve everything the original concept set out to. But it solved what it needed to, for the users who needed it most, within the constraints that existed.</p>
+    <div class="cs-callout warm">
+      <p>What I'd do differently: I'd advocate earlier for even lightweight usability testing with actual data-entry users before finalizing the side panel layout. We relied heavily on legacy system comparisons and internal review — real user observation would have surfaced edge cases faster.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT CASE -->
+<a class="cs-next" href="multiple-queues.html">
+  <span class="cs-next-label">Next case study</span>
+  <span class="cs-next-title">Multiple Queues: <em>One Dashboard, Every Lead</em></span>
+</a>
+
+<!-- FOOTER -->
+<footer style="background:var(--obs); padding:1.5rem 2rem;">
+  <div style="max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-family:var(--serif); font-size:12px; font-weight:300; color:rgba(254,252,249,0.3);">© 2026 Judy Lee</span>
+    <ul style="display:flex; gap:1.5rem; list-style:none;">
+      <li><a href="../index.html" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.3); text-decoration:none;">Home</a></li>
+      <li><a href="../index.html#work" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.3); text-decoration:none;">All Work</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  els.forEach(function(el) { io.observe(el); });
+  setTimeout(function() { els.forEach(function(el) { el.classList.add('visible'); }); }, 1000);
+</script>
+</body>
+</html>
