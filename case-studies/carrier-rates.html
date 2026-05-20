@@ -208,7 +208,7 @@
   }
 
   /* Section blocks */
-  .cs-section { padding: 4rem 0; border-bottom: 1px solid var(--sand); }
+  .cs-section { padding: 8rem 0; border-bottom: 1px solid var(--sand); }
   .cs-section:last-child { border-bottom: none; }
 
   .cs-section-label {
@@ -323,7 +323,7 @@
     padding: 3rem 0;
     border-bottom: 0.5px solid var(--sand);
   }
-  .cs-exp:first-child { border-top: 0.5px solid var(--sand); }
+  .cs-exp:first-child { border-top: none; }
   .cs-exp:last-child { border-bottom: none; }
   .cs-exp-header {
     display: flex;
@@ -409,8 +409,8 @@
   }
   .cs-feature:first-child { border-top: none; }
   .cs-feature:last-child { border-bottom: none; }
-  .cs-feature-text { max-width: 520px; }
-  .cs-feature.flip .cs-feature-img { order: -1; }
+  .cs-feature-text { max-width: 520px; order: 2; }
+  .cs-feature-img { order: 1; }
   .cs-feature-img img,
   .cs-feature-img video {
     width: 100%;
@@ -768,7 +768,7 @@
         </div>
       </div>
 
-      <div class="cs-feature flip">
+      <div class="cs-feature">
         <div class="cs-feature-text">
           <span class="cs-feature-num">02</span>
           <div class="cs-feature-title">Other Services placement</div>
@@ -790,7 +790,7 @@
         </div>
       </div>
 
-      <div class="cs-feature flip">
+      <div class="cs-feature">
         <div class="cs-feature-text">
           <span class="cs-feature-num">04</span>
           <div class="cs-feature-title">Doctor Pickup & carrier preferences</div>
@@ -806,7 +806,7 @@
 
 <!-- OUTCOME -->
 <div class="cs-content">
-  <div class="cs-section reveal">
+  <div class="cs-section reveal" style="border-top: 1px solid var(--sand);">
     <div class="cs-section-label">07 · Outcome & Reflection</div>
     <h2 class="cs-pull">Minimal change.<br><em>Real impact.</em></h2>
     <p class="cs-body">By defaulting to the most-used carrier and moving the API call behind a user action, we reduced unnecessary external calls by an estimated 91.66% per case — while keeping the experience completely familiar to lab teams.</p>
