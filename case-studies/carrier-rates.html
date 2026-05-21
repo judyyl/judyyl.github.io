@@ -410,16 +410,43 @@
   .cs-feature:first-child { border-top: none; }
   .cs-feature:last-child { border-bottom: none; }
   .cs-feature-text { max-width: 520px; order: 2; }
-  .cs-feature-img { order: 1; }
+  .cs-feature-img {
+    order: 1;
+    background: transparent;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
   .cs-feature-img img,
   .cs-feature-img video {
     width: 100%;
+    height: auto;
     display: block;
+    object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
   }
+  .cs-feature-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    min-height: 240px;
+    width: 100%;
+  }
+  .cs-feature-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+    text-align: center;
+  }
 
-  /* Wide section — breaks out of the 740px content column */
+  /* Wide section — breaks out of the content column */
   .cs-section-wide {
     max-width: 1100px;
     margin-left: auto;
@@ -451,41 +478,6 @@
     line-height: 1.9;
     color: #3D3835;
   }
-  .cs-feature-img {
-    background: transparent;
-    overflow: visible;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-  }
-  .cs-feature-img img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    border-radius: 6px;
-    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
-  }
-  .cs-feature-img-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 2rem;
-    min-height: 240px;
-    width: 100%;
-  }
-  .cs-feature-img-placeholder p {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--lg);
-    text-align: center;
-  }
-
-  /* Image blocks */
   .cs-img {
     margin: 1.5rem 0;
     background: var(--wl);
@@ -780,7 +772,7 @@
       </div>
 
       <div class="cs-feature">
-        <div>
+        <div class="cs-feature-text">
           <span class="cs-feature-num">03</span>
           <div class="cs-feature-title">Error feedback</div>
           <p class="cs-feature-desc">Explicit messaging when no rates are available for a selected carrier. Errors are now scoped to individual calls — simplifying error handling on the engineering side.</p>
@@ -824,12 +816,12 @@
 </a>
 
 <!-- FOOTER -->
-<footer style="background:var(--obs); padding:1.5rem 2rem;">
+<footer style="background:var(--obs); padding:3rem 2rem;">
   <div style="max-width:960px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;">
-    <span style="font-family:var(--serif); font-size:12px; font-weight:300; color:rgba(254,252,249,0.3);">© 2026 Judy Lee</span>
+    <span style="font-family:var(--serif); font-size:13px; font-weight:300; color:rgba(254,252,249,0.6);">© 2026 Judy Lee</span>
     <ul style="display:flex; gap:1.5rem; list-style:none;">
-      <li><a href="../index.html" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.3); text-decoration:none;">Home</a></li>
-      <li><a href="../index.html#work" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.3); text-decoration:none;">All Work</a></li>
+      <li><a href="../index.html" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.6); text-decoration:none; transition:color 0.2s;">Home</a></li>
+      <li><a href="../index.html#work" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.6); text-decoration:none; transition:color 0.2s;">All Work</a></li>
     </ul>
   </div>
 </footer>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiple Queues: One Dashboard, Every Lead — Judy Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --linen:  #FEFCF9;
+    --wl:     #F3EEE6;
+    --sand:   #D9C9B0;
+    --wg:     #6B6560;
+    --lg:     #C4BDB6;
+    --slt:    #EAF1F8;
+    --smid:   #8AAAC8;
+    --slate:  #4A72A0;
+    --sdeep:  #2E557A;
+    --sdk:    #1E3448;
+    --obs:    #1A1612;
+    --white:  #FFFFFF;
+    --max:    800px;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --sans:   'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--linen);
+    color: var(--obs);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(254,252,249,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+  }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--obs);
+    line-height: 1;
+  }
+  .nav-logo-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--slate);
+    margin-top: 4px;
+  }
+  .nav-back {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--wg);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--slate); }
+
+  /* HERO */
+  .cs-hero {
+    background: var(--sdk);
+    padding: 120px 2rem 80px;
+    text-align: center;
+  }
+  .cs-hero-inner { max-width: var(--max); margin: 0 auto; }
+  .cs-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--smid);
+    margin-bottom: 2rem;
+    display: block;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+  .cs-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--linen);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .cs-title em { font-style: italic; color: var(--smid); }
+  .cs-tagline {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(254,252,249,0.5);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 1s ease 0.35s both;
+  }
+  .cs-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+  .cs-tag {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--smid);
+    border: 1px solid rgba(138,170,200,0.3);
+    padding: 4px 12px;
+  }
+
+  /* META */
+  .cs-meta { background: var(--white); border-bottom: 1px solid var(--sand); }
+  .cs-meta-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cs-meta-item { padding: 1.25rem 1.5rem; border-right: 1px solid var(--sand); }
+  .cs-meta-item:last-child { border-right: none; }
+  .cs-meta-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--wg);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cs-meta-val { font-size: 13px; color: var(--obs); }
+
+  /* COVER */
+  .cs-cover {
+    overflow: hidden;
+    line-height: 0;
+    padding: 3rem 2rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .cs-cover img, .cs-cover video {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-cover-placeholder {
+    max-width: 960px;
+    margin: 0 auto;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wl);
+    border-radius: 8px;
+  }
+  .cs-cover-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  /* CONTENT */
+  .cs-content { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+
+  .cs-section { padding: 8rem 0; border-bottom: 1px solid var(--sand); }
+  .cs-section:last-child { border-bottom: none; }
+
+  .cs-section-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wg);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .cs-section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--slate);
+    flex-shrink: 0;
+  }
+
+  .cs-pull {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .cs-pull em { font-style: italic; color: var(--slate); }
+
+  .cs-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #3D3835;
+    margin-bottom: 1rem;
+  }
+  .cs-body:last-child { margin-bottom: 0; }
+  .cs-body strong { color: var(--obs); font-weight: 500; }
+
+  /* Callout */
+  .cs-callout {
+    border-left: 2px solid var(--slate);
+    background: var(--slt);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .cs-callout p {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--sdk);
+  }
+  .cs-callout.warm { background: var(--wl); border-color: var(--slate); }
+  .cs-callout.warm p { color: #3D3835; font-style: normal; font-size: 14px; line-height: 1.85; }
+
+  /* Bullets */
+  .cs-bullets { margin: 1rem 0; padding: 0; list-style: none; }
+  .cs-bullets li {
+    font-size: 14px;
+    line-height: 1.85;
+    color: #3D3835;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    position: relative;
+    border-bottom: 1px solid var(--sand);
+  }
+  .cs-bullets li:first-child { border-top: 1px solid var(--sand); }
+  .cs-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--slate); }
+
+  /* Explorations — 2-col: text left, image right */
+  .cs-explorations { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .cs-exp {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 0;
+    border-bottom: 0.5px solid var(--sand);
+  }
+  .cs-exp:first-child { border-top: none; }
+  .cs-exp:last-child { border-bottom: none; }
+  .cs-exp-header { display: flex; flex-direction: column; gap: 0.5rem; }
+  .cs-exp-num {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wg);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .cs-exp-content { flex: 1; }
+  .cs-exp-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1.2;
+  }
+  .cs-exp.chosen .cs-exp-title { color: var(--sdk); }
+  .cs-exp-chosen-badge {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+    background: var(--white);
+    border: 0.5px solid var(--slate);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .cs-exp-desc { font-size: 13px; line-height: 1.85; color: #3D3835; }
+  .cs-exp.chosen .cs-exp-desc { color: #3D5A7A; }
+  .cs-exp-img {
+    background: transparent;
+    overflow: visible;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .cs-exp-img img, .cs-exp-img video {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(26,22,18,0.1);
+  }
+  .cs-exp-img-placeholder {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wl);
+    border-radius: 6px;
+    width: 100%;
+  }
+  .cs-exp-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  /* Usability findings — large numbered list */
+  .cs-findings { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .cs-finding {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--sand);
+    align-items: start;
+  }
+  .cs-finding:first-child { border-top: 1px solid var(--sand); }
+  .cs-finding:last-child { border-bottom: none; }
+  .cs-finding-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1;
+    opacity: 0.35;
+  }
+  .cs-finding-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .cs-finding-desc { font-size: 13px; line-height: 1.85; color: #3D3835; }
+
+  /* Inline image */
+  .cs-img-free { margin: 2rem 0; overflow: visible; line-height: 0; }
+  .cs-img-free img, .cs-img-free video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-img-free-placeholder {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wl);
+    border-radius: 8px;
+  }
+  .cs-img-free-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+  .cs-img-caption {
+    font-size: 11px;
+    color: var(--wg);
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 0.75rem 0 0;
+    line-height: 1.5;
+  }
+
+  /* Wide breakout */
+  .cs-section-wide {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    overflow: visible;
+  }
+
+  /* Features — image top, text bottom */
+  .cs-features { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .cs-feature {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 4rem 0;
+    border-bottom: 0.5px solid var(--sand);
+  }
+  .cs-feature:first-child { border-top: none; }
+  .cs-feature:last-child { border-bottom: none; }
+  .cs-feature-text { max-width: 520px; order: 2; }
+  .cs-feature-img {
+    order: 1;
+    background: transparent;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .cs-feature-num {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wg);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .cs-feature-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .cs-feature-desc { font-size: 13px; line-height: 1.9; color: #3D3835; }
+  .cs-feature-img img, .cs-feature-img video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-feature-img-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 240px;
+    width: 100%;
+    background: var(--wl);
+    border-radius: 8px;
+  }
+  .cs-feature-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+    text-align: center;
+  }
+
+  /* Next case */
+  .cs-next {
+    background: var(--sdk);
+    padding: 4rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: background 0.3s;
+  }
+  .cs-next:hover { background: var(--obs); }
+  .cs-next-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--smid);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .cs-next-title {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 300;
+    color: var(--linen);
+    display: block;
+  }
+  .cs-next-title em { font-style: italic; color: var(--smid); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+
+  /* Side by side image pair */
+  .cs-img-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    overflow: visible;
+  }
+  .cs-img-pair-item { display: flex; flex-direction: column; gap: 0.5rem; overflow: visible; }
+  .cs-img-pair-item img, .cs-img-pair-item video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-img-pair-caption {
+    font-size: 11px;
+    color: var(--wg);
+    letter-spacing: 0.08em;
+    text-align: center;
+    line-height: 1.5;
+    padding-top: 0.25rem;
+  }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-text">JL</span>
+      <span class="nav-logo-rule"></span>
+    </a>
+    <a href="../index.html#work" class="nav-back">← All work</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <span class="cs-eyebrow">Lead Management · Loyal Health · 2022</span>
+    <h1 class="cs-title">Multiple Queues:<br><em>One Dashboard,</em><br>Every Lead.</h1>
+    <p class="cs-tagline">No direct user access. No clear requirements. Just a hard deadline and a client who needed something that didn't exist yet.</p>
+    <div class="cs-tags">
+      <span class="cs-tag">Product Design</span>
+      <span class="cs-tag">Dashboard Design</span>
+      <span class="cs-tag">Usability Testing</span>
+    </div>
+  </div>
+</section>
+
+<!-- META -->
+<div class="cs-meta">
+  <div class="cs-meta-inner">
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Role</span>
+      <span class="cs-meta-val">Product Designer</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Company</span>
+      <span class="cs-meta-val">Loyal Health</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Year</span>
+      <span class="cs-meta-val">2022</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Platform</span>
+      <span class="cs-meta-val">Web — Dashboard</span>
+    </div>
+  </div>
+</div>
+
+<!-- COVER -->
+<div class="cs-cover">
+  <video autoplay loop muted playsinline>
+    <source src="../images/multiple-queues/cover.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- CONTENT -->
+<div class="cs-content">
+
+  <!-- 01 Context -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">01 · Context & My Role</div>
+    <h2 class="cs-pull">A new client.<br>An expanding product.<br><em>A constraint I had to design around.</em></h2>
+    <p class="cs-body">The Lead Management tool is an internal dashboard built to help call center agents manage incoming leads, categorized by Health Risk Assessment type, specialty, and market. Our team owned the platform agents used day-to-day.</p>
+    <p class="cs-body">A new client — Client C — needed to replace their existing lead management system, but had one hard requirement our current tool didn't support: multiple work queues. Meeting that requirement meant expanding the product in a meaningful way.</p>
+    <p class="cs-body">The significant constraint: we had no direct access to Client C's users. Requirements were filtered through our leadership team, and I was designing based on what they relayed — with limited ability to ask follow-up questions or validate assumptions in real time.</p>
+  </div>
+
+  <!-- 02 Goal -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">02 · Goal</div>
+    <h2 class="cs-pull">Multiple queues.<br>Seamless switching.<br><em>No dead ends.</em></h2>
+    <p class="cs-body">Design a multi-queue system that allows agents to be assigned to multiple work queues, switch between them easily, and manage their leads without losing context or wasting time navigating between views.</p>
+  </div>
+
+  <!-- 03 Discovery -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">03 · Discovery</div>
+    <h2 class="cs-pull">When you can't talk<br>to users, you work<br><em>with what you have.</em></h2>
+    <p class="cs-body">With no direct access to Client C's end users, I had to be resourceful. Requirements came through leadership — I worked with what they shared and filled the gaps with primary research.</p>
+    <p class="cs-body">I explored how work queues function across different industries: how they're structured, how agents navigate between them, and what patterns exist in tools designed for high-volume lead management. The goal was to build enough of a mental model to design confidently despite the unknowns.</p>
+    <p class="cs-body">To keep the design flexible and avoid building on faulty assumptions, I anchored my explorations around the questions that remained unanswered:</p>
+    <ul class="cs-bullets">
+      <li>How many queues would an agent typically be assigned to?</li>
+      <li>How do agents prioritize their day — do they start with a specific queue, or scan across all of them?</li>
+      <li>How often would they switch between queues, and what triggers that switch?</li>
+    </ul>
+    <div class="cs-callout">
+      <p>These questions didn't have answers yet — but they shaped every layout decision I made. Flexibility wasn't a nice-to-have. It was a design requirement.</p>
+    </div>
+  </div>
+
+  <!-- 04 Explorations -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">04 · Explorations</div>
+    <h2 class="cs-pull">Three structures.<br><em>Very different tradeoffs.</em></h2>
+    <p class="cs-body">I explored three distinct approaches for how agents would view and switch between multiple queues — each with a meaningfully different relationship between the queue list and the lead table.</p>
+
+    <div class="cs-explorations">
+      <div class="cs-exp">
+        <div class="cs-exp-header">
+          <span class="cs-exp-num">01</span>
+          <div class="cs-exp-content">
+            <div class="cs-exp-title">Dropdown Menu</div>
+            <p class="cs-exp-desc">A compact selector with multi-select capability — simple and familiar. But viewing multiple queues simultaneously created a tangled table experience, and the layout left little room to scale as the product grew.</p>
+          </div>
+        </div>
+        <div class="cs-exp-img">
+          <video autoplay loop muted playsinline>
+            <source src="../images/multiple-queues/exploration-01.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="cs-exp">
+        <div class="cs-exp-header">
+          <span class="cs-exp-num">02</span>
+          <div class="cs-exp-content">
+            <div class="cs-exp-title">Tabs</div>
+            <p class="cs-exp-desc">A "my day" overview with tab-based queue switching. More visibility at a glance — but extra steps to open a queue, and with many queues assigned, the tab bar quickly became difficult to navigate.</p>
+          </div>
+        </div>
+        <div class="cs-exp-img">
+          <video autoplay loop muted playsinline>
+            <source src="../images/multiple-queues/exploration-02.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="cs-exp chosen">
+        <div class="cs-exp-header">
+          <span class="cs-exp-num">03</span>
+          <div class="cs-exp-content">
+            <div class="cs-exp-title">
+              Side Navigation
+              <span class="cs-exp-chosen-badge">Chosen</span>
+            </div>
+            <p class="cs-exp-desc">A persistent side panel listing all assigned queues — always visible, one click to switch. Users stay oriented, the layout scales naturally, and it leaves the main lead table clean and focused.</p>
+          </div>
+        </div>
+        <div class="cs-exp-img">
+          <video autoplay loop muted playsinline>
+            <source src="../images/multiple-queues/exploration-03.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>The side nav won because it solved the orientation problem. With multiple queues in play, agents need to know exactly where they are and get somewhere else fast. A persistent list does that without adding steps.</p>
+    </div>
+
+    <p class="cs-body">I also explored how to handle the assignment filter within the side nav. Adding expandable titles introduced complexity that wasn't earning its place — so I simplified to pill filters, keeping the interaction light and the panel clean.</p>
+
+    <div class="cs-img-pair">
+      <div class="cs-img-pair-item">
+        <img src="../images/multiple-queues/exploration-detail-1.png" alt="Expandable filter exploration">
+        <p class="cs-img-pair-caption">Expandable filter titles — too complex</p>
+      </div>
+      <div class="cs-img-pair-item">
+        <img src="../images/multiple-queues/exploration-detail-2.png" alt="Pill filter simplification">
+        <p class="cs-img-pair-caption">Simplified to pill filters</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 Usability Testing -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">05 · Usability Testing</div>
+    <h2 class="cs-pull">Five participants.<br><em>More insight than expected.</em></h2>
+    <p class="cs-body">Given the constraint of designing without direct user access throughout discovery, getting any usability testing at all was a win. We recruited five participants and focused the sessions on three core tasks: navigating the queue list, using the filters, and switching between queues.</p>
+    <p class="cs-body">Five participants is a small sample — but in usability testing, five is often enough to surface the most significant issues. And it did.</p>
+
+    <div class="cs-img-free">
+      <img src="../images/multiple-queues/usability-testing.png" alt="Usability testing session">
+      <p class="cs-img-caption">Usability testing with 5 participants — navigating queues, filters, and lead switching</p>
+    </div>
+
+    <div class="cs-findings">
+      <div class="cs-finding">
+        <div class="cs-finding-num">01</div>
+        <div>
+          <div class="cs-finding-title">Date of birth alongside the name</div>
+          <p class="cs-finding-desc">Agents use name and DOB together to verify patient identity. We hadn't included DOB in the initial designs — this was a critical gap that required an immediate update to the table layout.</p>
+        </div>
+      </div>
+      <div class="cs-finding">
+        <div class="cs-finding-num">02</div>
+        <div>
+          <div class="cs-finding-title">Global search is non-negotiable</div>
+          <p class="cs-finding-desc">Agents reach for the search bar instinctively for almost every task — finding patients by name, filtering by status, locating a specific queue. Our initial design scoped search to within a single queue. Watching agents reach for it to find patients across queues made it clear: search needed to be global.</p>
+        </div>
+      </div>
+      <div class="cs-finding">
+        <div class="cs-finding-num">03</div>
+        <div>
+          <div class="cs-finding-title">Navigation felt natural</div>
+          <p class="cs-finding-desc">Moving between queues and using the filters was easy and intuitive. The side nav orientation held up under real task conditions — the core structure was validated.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>The search finding was the most revealing. We watched an agent reach for the search bar immediately — not because our design prompted it, but because that's their default behavior. Designing around observed instincts is always more effective than designing around assumed workflows.</p>
+    </div>
+  </div>
+
+  <!-- 06 Final Design label + intro -->
+  <div class="cs-section reveal" style="border-bottom:none; padding-bottom:0;">
+    <div class="cs-section-label">06 · Final Design</div>
+    <h2 class="cs-pull">Every change<br><em>earned its place.</em></h2>
+  </div>
+
+</div><!-- /cs-content -->
+
+<!-- FINAL DESIGN FEATURES — wide breakout -->
+<div class="cs-section-wide">
+  <div class="cs-features">
+
+    <!-- Search before/after — usability finding update -->
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">01</span>
+        <div class="cs-feature-title">Global Search</div>
+        <p class="cs-feature-desc">Search moved from queue-scoped to global — covering all queues, all patients, all statuses. Agents can search for anyone without knowing which queue they're in first. Matches the instinctive behavior we observed in testing.</p>
+      </div>
+      <div class="cs-feature-img">
+        <div class="cs-img-pair" style="margin:0;">
+          <div class="cs-img-pair-item">
+            <img src="../images/multiple-queues/feature-search-before.png" alt="Search before — queue scoped">
+            <p class="cs-img-pair-caption">Before — search field within selected queue only</p>
+          </div>
+          <div class="cs-img-pair-item">
+            <img src="../images/multiple-queues/feature-search-after.png" alt="Search after — global">
+            <p class="cs-img-pair-caption">After — search relocated outside queue to search across all</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOB before/after — usability finding update -->
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">02</span>
+        <div class="cs-feature-title">Patient DOB with Name</div>
+        <p class="cs-feature-desc">Date of birth now appears directly beneath the patient's name — the two pieces of information agents need together to verify a patient, kept together so they don't have to scan across the screen to find both.</p>
+      </div>
+      <div class="cs-feature-img">
+        <div class="cs-img-pair" style="margin:0;">
+          <div class="cs-img-pair-item">
+            <img src="../images/multiple-queues/feature-dob-before.png" alt="Before — no DOB">
+            <p class="cs-img-pair-caption">Before — no date of birth visible</p>
+          </div>
+          <div class="cs-img-pair-item">
+            <img src="../images/multiple-queues/feature-dob-after.png" alt="After — DOB below name">
+            <p class="cs-img-pair-caption">After — DOB displayed below patient name</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Queue Overview -->
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">03</span>
+        <div class="cs-feature-title">Queue Overview</div>
+        <p class="cs-feature-desc">A high-level view of all assigned queues on entry — giving agents immediate context before they dive into any individual queue. No hunting, no guessing which queue needs attention first.</p>
+      </div>
+      <div class="cs-feature-img">
+        <img src="../images/multiple-queues/feature-01-overview.png" alt="Queue overview">
+      </div>
+    </div>
+
+    <!-- Side Navigation -->
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">04</span>
+        <div class="cs-feature-title">Side Navigation</div>
+        <p class="cs-feature-desc">Persistent list of all assigned queues in the side panel. One click to switch, always visible, never disruptive to the main lead table. Agents always know where they are.</p>
+      </div>
+      <div class="cs-feature-img">
+        <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:8px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+          <source src="../images/multiple-queues/feature-02-sidenav.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- Lead Assignment -->
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">05</span>
+        <div class="cs-feature-title">Lead Assignment</div>
+        <p class="cs-feature-desc">Agents can assign leads to themselves, reassign to a colleague, or unassign — all from within the dashboard. Keeps the workflow contained without requiring separate tools or manual tracking.</p>
+      </div>
+      <div class="cs-feature-img">
+        <video autoplay loop muted playsinline style="width:100%;display:block;border-radius:8px;box-shadow:0 8px 40px rgba(26,22,18,0.12),0 2px 12px rgba(26,22,18,0.06);">
+          <source src="../images/multiple-queues/feature-05-assign.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /cs-section-wide -->
+
+<!-- OUTCOME -->
+<div class="cs-content">
+  <div class="cs-section reveal" style="border-top: 1px solid var(--sand);">
+    <div class="cs-section-label">07 · Outcome & Reflection</div>
+    <h2 class="cs-pull">Assumptions validated.<br><em>More questions raised.</em></h2>
+    <p class="cs-body">The multi-queue dashboard shipped with the core requirements met: agents could be assigned to multiple queues, switch between them seamlessly, and manage their leads from a single, oriented interface. The usability testing changes — DOB placement and global search — meaningfully improved the experience before it reached users.</p>
+    <p class="cs-body">Five participants wasn't enough to call it done. A second round of testing was planned to validate further — particularly around queue prioritization and the assignment filter behavior.</p>
+    <ul class="cs-bullets">
+      <li>Queue setup — rules, conditions, and how leads are distributed across queues</li>
+      <li>HRA integration — connecting queues directly to Health Risk Assessment forms</li>
+      <li>Queue settings and user permissions — giving admins control over structure</li>
+    </ul>
+    <div class="cs-callout warm">
+      <p>Designing on assumptions isn't a failure state — it's a reality of product work. The discipline is in staying honest about what you don't know, building flexibility into decisions that could be wrong, and treating the first release as a hypothesis to be tested. Five usability participants changed two significant design decisions. Imagine what the second round revealed.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT CASE — loops back to case 01 -->
+<a class="cs-next" href="carrier-rates.html">
+  <span class="cs-next-label">Back to the beginning</span>
+  <span class="cs-next-title">Invoicing: <em>Carrier Rates Redesign</em></span>
+</a>
+
+<!-- FOOTER -->
+<footer style="background:var(--obs); padding:3rem 2rem;">
+  <div style="max-width:960px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-family:var(--serif); font-size:13px; font-weight:300; color:rgba(254,252,249,0.6);">© 2026 Judy Lee</span>
+    <ul style="display:flex; gap:1.5rem; list-style:none;">
+      <li><a href="../index.html" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.6); text-decoration:none; transition:color 0.2s;">Home</a></li>
+      <li><a href="../index.html#work" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.6); text-decoration:none; transition:color 0.2s;">All Work</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  els.forEach(function(el) { io.observe(el); });
+  setTimeout(function() { els.forEach(function(el) { el.classList.add('visible'); }); }, 1000);
+</script>
+</body>
+</html>
