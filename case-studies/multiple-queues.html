@@ -264,18 +264,18 @@
   .cs-bullets li:first-child { border-top: 1px solid var(--sand); }
   .cs-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--slate); }
 
-  /* Explorations — 2-col: text left, image right */
+  /* Explorations — stacked: video top, text bottom */
   .cs-explorations { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
   .cs-exp {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 3rem;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     padding: 3rem 0;
     border-bottom: 0.5px solid var(--sand);
   }
   .cs-exp:first-child { border-top: none; }
   .cs-exp:last-child { border-bottom: none; }
+  .cs-exp-img { order: -1; }
   .cs-exp-header { display: flex; flex-direction: column; gap: 0.5rem; }
   .cs-exp-num {
     font-family: var(--sans);
@@ -329,11 +329,9 @@
   }
   .cs-exp-img video {
     width: 100%;
-    max-height: 360px;
     display: block;
     border-radius: 6px;
     box-shadow: 0 4px 24px rgba(26,22,18,0.1);
-    object-fit: contain;
   }
   .cs-exp-img-placeholder {
     height: 260px;
@@ -698,7 +696,7 @@
 
     <p class="cs-body">I also explored how to handle the assignment filter within the side nav. Adding expandable titles introduced complexity that wasn't earning its place — so I simplified to pill filters, keeping the interaction light and the panel clean.</p>
 
-    <div class="cs-img-pair">
+    <div class="cs-img-pair" style="max-width:560px; margin:2rem auto; gap:3rem;">
       <div class="cs-img-pair-item">
         <img src="../images/multiple-queues/exploration-detail-1.png" alt="Expandable filter exploration">
         <p class="cs-img-pair-caption">Expandable filter titles — too complex</p>
@@ -718,7 +716,7 @@
     <p class="cs-body">Five participants is a small sample — but in usability testing, five is often enough to surface the most significant issues. And it did.</p>
 
     <div class="cs-img-free">
-      <img src="../images/multiple-queues/usability-testing.png" alt="Usability testing session">
+      <img src="../images/multiple-queues/usability-testing.png" alt="Usability testing session" style="box-shadow:none;">
       <p class="cs-img-caption">Usability testing with 5 participants — navigating queues, filters, and lead switching</p>
     </div>
 
