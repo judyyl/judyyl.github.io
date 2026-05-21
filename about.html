@@ -301,7 +301,7 @@
   /* FOOTER */
   footer {
     background: var(--obs);
-    padding: 1.5rem 2rem;
+    padding: 3rem 2rem;
     display: flex;
     justify-content: center;
   }
@@ -314,20 +314,20 @@
   }
   .footer-copy {
     font-family: var(--serif);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
-    color: rgba(254,252,249,0.3);
+    color: rgba(254,252,249,0.6);
   }
   .footer-links { display: flex; gap: 1.5rem; list-style: none; }
   .footer-links a {
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(254,252,249,0.3);
+    color: rgba(254,252,249,0.6);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--smid); }
+  .footer-links a:hover { color: var(--linen); }
 
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -350,7 +350,6 @@
     <ul class="nav-links">
       <li><a href="index.html#work">Work</a></li>
       <li><a href="about.html" class="active">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -370,12 +369,7 @@
     <!-- LEFT — photo + meta -->
     <div class="about-photo">
       <div class="about-photo-img">
-        <!-- Add your photo: about-photo.png -->
-        <img src="images/about-photo.png" alt="Judy Lee"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="about-photo-placeholder" style="display:none;">
-          <p>Add about-photo.png<br>to images/</p>
-        </div>
+        <img src="images/about-canyon/about-photo.JPG" alt="Judy Lee" style="object-position: center 30%;">
       </div>
       <div class="about-meta">
         <div class="about-meta-item">
@@ -472,9 +466,8 @@
   <div class="footer-inner">
     <span class="footer-copy">© 2026 Judy Lee</span>
     <ul class="footer-links">
-      <li><a href="https://www.judylee.design" target="_blank">Website</a></li>
-      <li><a href="#" target="_blank">LinkedIn</a></li>
-      <li><a href="#" target="_blank">Read.cv</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://www.linkedin.com/in/judylee73/" target="_blank">LinkedIn</a></li>
     </ul>
   </div>
 </footer>
