@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(sessionStorage.getItem('jl_auth')!=='1'){window.location.replace('../password.html');}</script>
+<title>Canvas Unification Initiative — Judy Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --linen:  #FEFCF9;
+    --wl:     #F3EEE6;
+    --sand:   #D9C9B0;
+    --wg:     #6B6560;
+    --lg:     #C4BDB6;
+    --slt:    #EAF1F8;
+    --smid:   #8AAAC8;
+    --slate:  #4A72A0;
+    --sdeep:  #2E557A;
+    --sdk:    #1E3448;
+    --obs:    #1A1612;
+    --white:  #FFFFFF;
+    --max:    800px;
+    --serif:  'Newsreader', Georgia, serif;
+    --sans:   'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--linen);
+    color: var(--obs);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(254,252,249,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+  }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--obs);
+    line-height: 1;
+  }
+  .nav-logo-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--slate);
+    margin-top: 4px;
+  }
+  .nav-back {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--wg);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--slate); }
+
+  /* CASE STUDY HERO */
+  .cs-hero {
+    background: var(--sdk);
+    padding: 120px 2rem 80px;
+    text-align: center;
+  }
+  .cs-hero-inner { max-width: var(--max); margin: 0 auto; }
+  .cs-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--smid);
+    margin-bottom: 2rem;
+    display: block;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+  .cs-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--linen);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .cs-title em { font-style: italic; color: var(--smid); }
+  .cs-tagline {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(254,252,249,0.5);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 1s ease 0.35s both;
+  }
+  .cs-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+  .cs-tag {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--smid);
+    border: 1px solid rgba(138,170,200,0.3);
+    padding: 4px 12px;
+  }
+
+  /* META ROW */
+  .cs-meta {
+    background: var(--white);
+    border-bottom: 1px solid var(--sand);
+  }
+  .cs-meta-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cs-meta-item {
+    padding: 1.25rem 1.5rem;
+    border-right: 1px solid var(--sand);
+  }
+  .cs-meta-item:last-child { border-right: none; }
+  .cs-meta-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--wg);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cs-meta-val {
+    font-size: 13px;
+    color: var(--obs);
+  }
+
+  /* COVER IMAGE — no container */
+  .cs-cover {
+    overflow: hidden;
+    line-height: 0;
+    padding: 3rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .cs-cover img,
+  .cs-cover video {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-cover-placeholder {
+    max-width: 960px;
+    margin: 0 auto;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .cs-cover-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  /* CONTENT */
+  .cs-content {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Section blocks */
+  .cs-section { padding: 8rem 0; border-bottom: 1px solid var(--sand); }
+  .cs-section:last-child { border-bottom: none; }
+
+  .cs-section-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wg);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .cs-section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--slate);
+    flex-shrink: 0;
+  }
+
+  .cs-pull {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .cs-pull em { font-style: italic; color: var(--slate); }
+
+  .cs-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #3D3835;
+    margin-bottom: 1rem;
+  }
+  .cs-body:last-child { margin-bottom: 0; }
+
+  .cs-body strong { color: var(--obs); font-weight: 500; }
+
+  /* Callout */
+  .cs-callout {
+    border-left: 2px solid var(--slate);
+    background: var(--slt);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .cs-callout p {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--sdk);
+  }
+
+  .cs-callout.warm {
+    background: var(--wl);
+    border-color: var(--slate);
+  }
+  .cs-callout.warm p { color: #3D3835; font-style: normal; font-size: 14px; line-height: 1.85; }
+
+  /* Stat callout */
+  .cs-stat {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--wl);
+    border-top: 2px solid var(--slate);
+    border-bottom: 1px solid var(--sand);
+    margin: 2rem 0;
+  }
+  .cs-stat-num {
+    font-family: var(--serif);
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .cs-stat-desc {
+    font-size: 14px;
+    color: #3D3835;
+    line-height: 1.75;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  /* Bullets */
+  .cs-bullets { margin: 1rem 0; padding: 0; list-style: none; }
+  .cs-bullets li {
+    font-size: 14px;
+    line-height: 1.85;
+    color: #3D3835;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    position: relative;
+    border-bottom: 1px solid var(--sand);
+  }
+  .cs-bullets li:first-child { border-top: 1px solid var(--sand); }
+  .cs-bullets li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--slate);
+  }
+
+  /* Explorations — 2-column, no cards */
+  .cs-explorations { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .cs-exp {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 0;
+    border-bottom: 0.5px solid var(--sand);
+  }
+  .cs-exp:first-child { border-top: none; }
+  .cs-exp:last-child { border-bottom: none; }
+  .cs-exp-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .cs-exp-num {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wg);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .cs-exp-content { flex: 1; }
+  .cs-exp-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1.2;
+  }
+  .cs-exp.chosen .cs-exp-title { color: var(--sdk); }
+  .cs-exp-chosen-badge {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+    background: var(--white);
+    border: 0.5px solid var(--slate);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .cs-exp-desc {
+    font-size: 13px;
+    line-height: 1.85;
+    color: #3D3835;
+  }
+  .cs-exp.chosen .cs-exp-desc { color: #3D5A7A; }
+  .cs-exp-img {
+    background: transparent;
+    overflow: hidden;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cs-exp-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(26,22,18,0.1);
+  }
+  .cs-exp-img-placeholder {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cs-exp-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+
+  /* Features — stacked layout */
+  .cs-features { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .cs-feature {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 4rem 0;
+    border-bottom: 0.5px solid var(--sand);
+  }
+  .cs-feature:first-child { border-top: none; }
+  .cs-feature:last-child { border-bottom: none; }
+  .cs-feature-text { max-width: 520px; order: 2; }
+  .cs-feature-img {
+    order: 1;
+    background: transparent;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .cs-feature-img img,
+  .cs-feature-img video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06);
+  }
+  .cs-feature-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    min-height: 240px;
+    width: 100%;
+  }
+  .cs-feature-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+    text-align: center;
+  }
+
+  /* Wide section — breaks out of the content column */
+  .cs-section-wide {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    overflow: visible;
+  }
+
+  .cs-feature-num {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wg);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .cs-feature-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .cs-feature-desc {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #3D3835;
+  }
+  .cs-img {
+    margin: 1.5rem 0;
+    background: var(--wl);
+    border: 1px solid var(--sand);
+    overflow: hidden;
+    line-height: 0;
+  }
+  .cs-img img, .cs-img video {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .cs-img-placeholder {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .cs-img-placeholder p {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lg);
+  }
+  .cs-img-caption {
+    font-size: 11px;
+    color: var(--wg);
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 0.75rem 0 0;
+    line-height: 1.5;
+  }
+
+  /* Two-col image grid */
+  .cs-img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--sand);
+    margin: 1.5rem 0;
+    border: 1px solid var(--sand);
+  }
+  .cs-img-grid .cs-img { margin: 0; border: none; }
+
+  /* Next case link */
+  .cs-next {
+    background: var(--sdk);
+    padding: 4rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: background 0.3s;
+  }
+  .cs-next:hover { background: var(--obs); }
+  .cs-next-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--smid);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .cs-next-title {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 300;
+    color: var(--linen);
+    display: block;
+  }
+  .cs-next-title em { font-style: italic; color: var(--smid); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  /* RESULTS AT A GLANCE */
+  .cs-glance { background: var(--wl); border-bottom: 1px solid var(--sand); }
+  .cs-glance-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cs-glance-item { padding: 2rem 1.5rem; border-right: 1px solid var(--sand); text-align: center; }
+  .cs-glance-item:last-child { border-right: none; }
+  .cs-glance-num {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .cs-glance-label {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wg);
+    line-height: 1.6;
+  }
+
+  /* METRICS GRID */
+  .cs-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--sand);
+    border: 1px solid var(--sand);
+    margin: 2rem 0;
+  }
+  .cs-metric { background: var(--linen); padding: 2rem 1.75rem; }
+  .cs-metric-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .cs-metric-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--obs);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .cs-metric-desc { font-size: 12.5px; line-height: 1.8; color: #3D3835; }
+
+  @media (max-width: 640px) {
+    .cs-meta-inner, .cs-glance-inner { grid-template-columns: repeat(2, 1fr); }
+    .cs-meta-item:nth-child(2), .cs-glance-item:nth-child(2) { border-right: none; }
+    .cs-glance-item:nth-child(-n+2) { border-bottom: 1px solid var(--sand); }
+    .cs-metrics { grid-template-columns: 1fr; }
+    .cs-section { padding: 5rem 0; }
+  }
+
+  /* HERO STATS */
+  .cs-hero-stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 640px;
+    margin: 3.5rem auto 0;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(138,170,200,0.2);
+    animation: fadeUp 1s ease 0.65s both;
+  }
+  .cs-hero-stat { flex: 1 1 130px; padding: 0 1rem; text-align: center; }
+  .cs-hero-stat + .cs-hero-stat { border-left: 1px solid rgba(138,170,200,0.15); }
+  .cs-hero-stat-num {
+    display: block;
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--smid);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .cs-hero-stat-label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(254,252,249,0.45);
+    line-height: 1.6;
+  }
+  @media (max-width: 640px) {
+    .cs-hero-stat { flex-basis: 45%; padding: 1rem; }
+    .cs-hero-stat + .cs-hero-stat { border-left: none; }
+  }
+
+  /* NUMBERS UNDER COVER */
+  .cs-numbers { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+  .cs-numbers-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--sand);
+    border-bottom: 1px solid var(--sand);
+    padding: 2.25rem 0;
+  }
+  .cs-number { text-align: center; padding: 0 0.75rem; }
+  .cs-number + .cs-number { border-left: 1px solid var(--sand); }
+  .cs-number-num {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-style: normal;
+    font-variant-numeric: lining-nums;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.02em;
+    color: var(--slate);
+    line-height: 1;
+    margin-bottom: 0.7rem;
+  }
+  .cs-number-label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wg);
+    line-height: 1.6;
+  }
+  .cs-metric-num, .cs-stat-num {
+    font-family: var(--sans) !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    font-variant-numeric: lining-nums;
+    letter-spacing: -0.03em;
+  }
+  @media (max-width: 640px) {
+    .cs-numbers-inner { grid-template-columns: repeat(2, 1fr); row-gap: 1.75rem; }
+    .cs-number:nth-child(3) { border-left: none; }
+  }
+
+  /* BULLETS: plain bullet points, no divider lines */
+  .cs-bullets li { border-bottom: none; padding: 0.3rem 0 0.3rem 1.25rem; }
+  .cs-bullets li:first-child { border-top: none; }
+  .cs-bullets li::before { content: '•'; }
+
+  /* CAPABILITY MATRIX */
+  .cs-matrix-wrap { margin: 2.5rem 0 0.5rem; }
+  .cs-matrix-label {
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wg);
+    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+  }
+  .cs-matrix-label::before { content: ''; width: 24px; height: 1px; background: var(--slate); flex-shrink: 0; }
+  .cs-matrix-scroll { overflow-x: auto; }
+  .cs-matrix { width: 100%; min-width: 620px; border-collapse: collapse; background: var(--white); border: 1px solid var(--sand); }
+  .cs-matrix th, .cs-matrix td { padding: 1rem 0.75rem; text-align: center; border-bottom: 1px solid var(--sand); font-size: 13px; }
+  .cs-matrix th { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--wg); font-weight: 400; background: var(--linen); }
+  .cs-matrix th.grp { color: var(--obs); letter-spacing: 0.18em; }
+  .cs-matrix .cap { text-align: left; padding-left: 1.25rem; width: 30%; }
+  .cs-matrix td.cap { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--obs); }
+  .cs-matrix .after { background: var(--slt); border-left: 2px solid var(--slate); }
+  .cs-matrix th.after { color: var(--sdk); }
+  .cs-matrix tr:last-child td { border-bottom: none; }
+  .cs-matrix .yes, .cs-matrix .no { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; letter-spacing: 0.03em; }
+  .cs-matrix .yes i { width: 10px; height: 10px; border-radius: 50%; background: var(--slate); display: inline-block; }
+  .cs-matrix .no { color: var(--wg); }
+  .cs-matrix .no i { width: 10px; height: 2px; background: var(--lg); display: inline-block; }
+  .cs-matrix-note { font-size: 11px; line-height: 1.7; color: var(--wg); letter-spacing: 0.04em; margin-top: 0.75rem; }
+
+  /* MATRIX: cleaner, lighter styling */
+  .cs-matrix { background: transparent; border: none; border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand); }
+  .cs-matrix th { background: transparent; }
+  .cs-matrix .after { background: transparent; border-left: 1px solid var(--sand); }
+  .cs-matrix th.after { background: transparent; color: var(--slate); }
+  .cs-matrix th.grp.after { color: var(--slate); }
+  .cs-matrix th, .cs-matrix td { border-bottom: 1px solid #E9E0D0; }
+  .cs-matrix thead tr:first-child th { border-bottom: none; padding-bottom: 0.25rem; }
+  .cs-matrix tbody tr:last-child td { border-bottom: none; }
+  .cs-matrix .yes, .cs-matrix .no { vertical-align: middle; line-height: 1; }
+
+  /* FIGURES + THREE-UPS */
+  .cs-fig { margin: 2rem 0; line-height: 0; }
+  .cs-fig img { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06); }
+  .cs-fig .cs-img-caption { line-height: 1.5; }
+  .cs-breakout { width: min(1100px, calc(100vw - 4rem)); position: relative; left: 50%; transform: translateX(-50%); }
+  .cs-threeup { display: flex; flex-direction: column; gap: 3rem; margin: 2.5rem 0; max-width: 960px; }
+  .cs-threeup.cs-narrow { max-width: 820px; }
+  .cs-subhead { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 300; line-height: 1.15; color: var(--obs); margin-bottom: 0.5rem; }
+  .cs-threeup figure { margin: 0; line-height: 0; }
+  .cs-threeup img { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06); }
+  .cs-threeup .cs-img-caption { line-height: 1.5; padding-top: 1rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-text">JL</span>
+      <span class="nav-logo-rule"></span>
+    </a>
+    <a href="../index.html#work" class="nav-back">← All work</a>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <span class="cs-eyebrow">Workflow Canvases · EKN / <span style="text-transform:none;">over.vu</span> · 2026</span>
+    <h1 class="cs-title">Canvas<br><em>Unification</em><br>Initiative</h1>
+    <p class="cs-tagline">Three canvases, built over time and never reconciled. One consistent experience, without making users relearn a thing.</p>
+    <div class="cs-tags">
+      <span class="cs-tag">Product Design</span>
+      <span class="cs-tag">User Research</span>
+      <span class="cs-tag">Design Systems</span>
+      <span class="cs-tag">Enterprise</span>
+    </div>
+  </div>
+</section>
+
+<!-- META -->
+<div class="cs-meta">
+  <div class="cs-meta-inner">
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Role</span>
+      <span class="cs-meta-val">Lead Product Designer</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Company</span>
+      <span class="cs-meta-val">EKN / over.vu</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Year</span>
+      <span class="cs-meta-val">2026</span>
+    </div>
+    <div class="cs-meta-item">
+      <span class="cs-meta-label">Platform</span>
+      <span class="cs-meta-val">Web — Canvas</span>
+    </div>
+  </div>
+</div>
+
+<!-- COVER IMAGE -->
+<div class="cs-cover">
+  <video autoplay loop muted playsinline>
+    <source src="../images/canvas-unification/final-automations-walkthrough.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- NUMBERS UNDER COVER -->
+<div class="cs-numbers">
+  <div class="cs-numbers-inner">
+    <div class="cs-number"><span class="cs-number-num">12+</span><span class="cs-number-label">Pain points resolved</span></div>
+    <div class="cs-number"><span class="cs-number-num">~77%</span><span class="cs-number-label">Faster to configure</span></div>
+    <div class="cs-number"><span class="cs-number-num">82%+</span><span class="cs-number-label">Task completion</span></div>
+    <div class="cs-number"><span class="cs-number-num">0</span><span class="cs-number-label">New post-launch bugs</span></div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="cs-content">
+
+  <!-- 01 Context -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">01 · Context & My Role</div>
+    <h2 class="cs-pull">Three canvases.<br><em>Each better than the last.</em><br>None reconciled.</h2>
+    <p class="cs-body">over.vu is an internal civil engineering project management application used company-wide to manage client work. Three of its features are canvas-based: <strong>Automation Builder</strong>, <strong>People Selection</strong>, and <strong>Status Gating</strong>.</p>
+    <p class="cs-body">Each canvas was built sequentially, and each improved on the one before it. But none of them was ever brought back in line with the others. The result was an inconsistent experience across all three, and a backlog of user support tickets for each.</p>
+    <p class="cs-body">The canvases didn&rsquo;t just look different, they behaved differently. Duplicating a node wasn&rsquo;t possible on any of them. Multiple conditions per node worked in People Selection and Status Gating, but not in Automations. Deleting a connection on its own worked in People Selection, worked differently in Status Gating, and wasn&rsquo;t possible in Automations, where removing a connection meant deleting a node.</p>
+    <p class="cs-body">As Lead Product Designer, I inherited the inconsistency. My job was to unify the three without making users relearn everything they already knew.</p>
+    <div class="cs-matrix-label" style="margin-top:3rem;">Before</div>
+    <div class="cs-threeup cs-breakout cs-narrow">
+      <figure>
+        <img src="../images/canvas-unification/context-before-automations.png" alt="Automation Builder before">
+      <p class="cs-img-caption">Before · Automation Builder</p>
+      </figure>
+      <figure>
+        <img src="../images/canvas-unification/context-before-pse.png" alt="People Selection before">
+      <p class="cs-img-caption">Before · People Selection</p>
+      </figure>
+      <figure>
+        <img src="../images/canvas-unification/context-before-status.png" alt="Status Gating before">
+      <p class="cs-img-caption">Before · Status Gating</p>
+      </figure>
+    </div>
+
+  </div>
+
+  <!-- 02 Goal -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">02 · Goal</div>
+    <h2 class="cs-pull">Audit. Unify.<br><em>Improve.</em></h2>
+    <p class="cs-body">How might we bring three canvas features into one consistent experience, while resolving the pain points users had already reported, and raising the bar on all of them? People Selection was the strongest of the three, so it became the baseline, though its experience still had plenty of room to improve. The goal was to beat it, not just copy it.</p>
+  </div>
+
+  <!-- 03 Research -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">03 · Research</div>
+    <h2 class="cs-pull">The research told us<br><em>what not to blow up.</em></h2>
+    <p class="cs-body">I sent a survey to <strong>8 power users</strong> across all three features, and <strong>5 of 8 responded</strong>. The results were surprisingly positive overall. The frustrations that did come up lined up directly with tickets we already knew about, rather than surfacing anything new.</p>
+    <ul class="cs-bullets">
+      <li>The known tickets represented the real pain points</li>
+      <li>The experience was still learnable, despite the inconsistency across canvases</li>
+      <li>No hidden problems were waiting to be found</li>
+    </ul>
+    <div class="cs-callout">
+      <p>A positive result isn't a null result. It told us where not to intervene, and that signal shaped a conservative, focused approach: fix what users named, and leave what they'd already learned.</p>
+    </div>
+
+  </div>
+
+  <!-- 04 Audit & Approach -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">04 · Audit & Approach</div>
+    <h2 class="cs-pull">Document everything.<br><em>Design within what's buildable.</em></h2>
+    <p class="cs-body">I audited each canvas end to end, documenting screens, nodes, conditions, actions, and interactions. I referenced the React Flow library throughout, so every design change stayed technically feasible.</p>
+    <div class="cs-fig cs-breakout" style="margin-bottom:4.5rem;">
+      <img src="../images/canvas-unification/audit-board.png" alt="Audit board mapping screens, nodes, conditions and actions across all three canvases">
+      <p class="cs-img-caption">The audit board: screens, nodes, conditions and actions across all three canvases</p>
+    </div>
+
+    <p class="cs-body">Three working relationships kept the project aligned from start to finish:</p>
+    <ul class="cs-bullets">
+      <li><strong>Dev leads:</strong> regular syncs to validate feasibility as designs evolved</li>
+      <li><strong>PM:</strong> coverage check to make sure every addressable pain point was in scope</li>
+      <li><strong>Other designers:</strong> coordination wherever their work intersected with the canvas</li>
+    </ul>
+    <div class="cs-callout warm">
+      <p>The guiding rule was to simplify the visuals, preserve the flows. Condition and action flows stayed as they were, so users kept the muscle memory they'd already built.</p>
+    </div>
+
+<h3 class="cs-subhead" style="margin-top:4.5rem;">Node exploration</h3>
+<div class="cs-explorations">
+    <div class="cs-exp">
+      <div class="cs-exp-header"><span class="cs-exp-num">Exploration 01</span><div class="cs-exp-title">Node v1: keep the styling, tweak it</div><p class="cs-exp-desc">The first direction kept the existing node styling with only slight modifications. It stood out too much on the canvas, and the colors didn&rsquo;t work well together.</p></div>
+      <div class="cs-exp-img">
+        <img src="../images/canvas-unification/exploration-node-v1.png" alt="Node v1: keep the styling, tweak it" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cs-exp-img-placeholder" style="display:none;"><p>exploration-node-v1.png</p></div>
+      </div>
+    </div>
+    <div class="cs-exp">
+      <div class="cs-exp-header"><span class="cs-exp-num">Exploration 02</span><div class="cs-exp-title">Node v2: action as text, type as a badge</div><p class="cs-exp-desc">The general action of the node becomes the text, with the node type shown as a badge. The limit: it breaks down when a condition node holds multiple conditions.</p></div>
+      <div class="cs-exp-img">
+        <img src="../images/canvas-unification/exploration-node-v2.png" alt="Node v2: action as text, type as a badge" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cs-exp-img-placeholder" style="display:none;"><p>exploration-node-v2.png</p></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- 05 Final Design label -->
+  <div class="cs-section reveal" style="border-bottom:none; padding-bottom:0;">
+    <div class="cs-section-label">05 · Final Design</div>
+    <h2 class="cs-pull">One canvas language,<br><em>three features.</em></h2>
+    <p class="cs-body">The redesign pulled the strongest ideas from across the three canvases into one shared system. It didn&rsquo;t just copy People Selection&rsquo;s best interactions into the other two canvases: for each one, I looked for what could be better, then applied the improved version everywhere.</p>
+
+
+  </div>
+
+</div><!-- /cs-content -->
+
+<!-- FINAL DESIGN FEATURES — wide breakout -->
+<div class="cs-section-wide">
+  <div class="cs-matrix-label" style="max-width:960px;margin:3.5rem auto 1rem;">After</div>
+  <div class="cs-threeup" style="margin:0 auto;padding-bottom:5rem;">
+    <figure>
+        <img src="../images/canvas-unification/final-01-automations.png" alt="Automation Builder after">
+      <p class="cs-img-caption">After · Automation Builder</p>
+      </figure>
+    <figure>
+        <img src="../images/canvas-unification/final-02-pse.png" alt="People Selection after">
+      <p class="cs-img-caption">After · People Selection</p>
+      </figure>
+    <figure>
+        <img src="../images/canvas-unification/final-03-status.png" alt="Status Gating after">
+      <p class="cs-img-caption">After · Status Gating</p>
+      </figure>
+  </div>
+  <div style="border-top:1px solid var(--sand);padding-top:4rem;">
+    <div class="cs-section-label" style="margin-bottom:0;">Key changes</div>
+  </div>
+  <div class="cs-features">
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">01</span>
+        <div class="cs-feature-title">Pill indicator nodes</div>
+        <p class="cs-feature-desc">Solid color headers were replaced with a simplified pill showing node color and node type. The nodes read more cleanly, and the same visual language now carries across all three canvases.</p>
+
+      </div>
+      <div class="cs-feature-img">
+        <img src="../images/canvas-unification/feature-01-pill.png" alt="Pill indicator nodes"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cs-feature-img-placeholder" style="display:none;"><p>feature-01-pill.png</p></div>
+      </div>
+    </div>
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">02</span>
+        <div class="cs-feature-title">Multiple conditions per node</div>
+        <p class="cs-feature-desc">Already available in People Selection, now unified into Automations, so users can build richer logic without stacking extra nodes. The panel itself is improved too: Collapse All / Expand All, a delete button in each condition&rsquo;s header, a field type badge, and a single Add Condition button where there used to be two. Status Gating&rsquo;s transition rules are the equivalent: a status only moves to the connected status once its conditions are met. They now use the same side-panel layout instead of a modal.</p>
+
+      </div>
+      <div class="cs-feature-img" style="gap:3.5rem;align-items:flex-start;">
+        <figure style="flex:0 1 340px;min-width:0;margin:0;">
+          <img src="../images/canvas-unification/feature-02-condition-expanded.png" alt="Condition panel, expanded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cs-feature-img-placeholder" style="display:none;"><p>feature-02-condition-expanded.png</p></div>
+          <figcaption class="cs-img-caption">Expanded</figcaption>
+        </figure>
+        <figure style="flex:0 1 340px;min-width:0;margin:0;">
+          <img src="../images/canvas-unification/feature-02-condition-collapsed.png" alt="Condition panel, collapsed" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cs-feature-img-placeholder" style="display:none;"><p>feature-02-condition-collapsed.png</p></div>
+          <figcaption class="cs-img-caption">Collapsed</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">03</span>
+        <div class="cs-feature-title">More actions on connections</div>
+        <p class="cs-feature-desc">Select a connection to add a node in between, relink it to a different node, or delete it. <strong style="font-weight:500;color:var(--obs);">Before, the only way to remove a connection was to delete a node, one at a time. Now you can delete a connection without removing the node, and reconnect the nodes.</strong> Adding a node between two nodes is new; People Selection didn&rsquo;t have it. People Selection did already have a version of relinking and deleting, so the updated design improves that interaction and brings it to Automations and Status Gating too, fixing a long-standing friction point.</p>
+
+      </div>
+      <div class="cs-feature-img">
+        <img src="../images/canvas-unification/feature-03-connection-actions.png" alt="Connection actions: Add Node, Link To, Delete"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cs-feature-img-placeholder" style="display:none;"><p>feature-03-connection-actions.png</p></div>
+      </div>
+    </div>
+
+    <div class="cs-feature reveal">
+      <div class="cs-feature-text">
+        <span class="cs-feature-num">04</span>
+        <div class="cs-feature-title">Node duplication</div>
+        <p class="cs-feature-desc">Duplicating a node is now available on all three canvases, closing one of the most-requested tickets.</p>
+
+      </div>
+      <div class="cs-feature-img">
+        <figure style="margin:0;width:100%;">
+          <img src="../images/canvas-unification/feature-04-duplicate.png" alt="Node menu with Connect Node, Duplicate Node and Delete Node">
+          <figcaption class="cs-img-caption">No &ldquo;before&rdquo; for this one: duplicating a node wasn&rsquo;t possible on any canvas.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /cs-section-wide -->
+
+<!-- OUTPUT -->
+<div class="cs-content">
+  <div class="cs-section reveal" style="border-top:1px solid var(--sand);">
+    <div class="cs-section-label">06 · Output</div>
+    <h2 class="cs-pull">Designed to ship,<br><em>documented to last.</em></h2>
+    <p class="cs-body">The deliverable was an <strong>extensive annotated handoff</strong> with a detailed breakdown of the specific changes across all three features. Alongside it, the full canvas audit gave engineering and QA a shared reference for what each canvas did before, and what it should do now.</p>
+    <ul class="cs-bullets">
+      <li>Full audit of all three canvases: screens, nodes, conditions, actions, interactions</li>
+      <li>Redesigned node system with pill indicators</li>
+      <li>Annotated handoff with change-by-change breakdown across Automation Builder, People Selection, and Status Gating</li>
+      <li>Launched with full cross-functional alignment across design, engineering, and QA</li>
+    </ul>
+
+    <div class="cs-fig cs-breakout">
+      <img src="../images/canvas-unification/handoff-annotations-01automations.png" alt="Annotated handoff: Automation Builder">
+      <p class="cs-img-caption">Annotated handoff: Automation Builder</p>
+    </div>
+    <div class="cs-fig cs-breakout">
+      <img src="../images/canvas-unification/handoff-annotations-02pse.png" alt="Annotated handoff: People Selection">
+      <p class="cs-img-caption">Annotated handoff: People Selection</p>
+    </div>
+    <div class="cs-fig cs-breakout">
+      <img src="../images/canvas-unification/handoff-annotations-03status.png" alt="Annotated handoff: Status Gating">
+      <p class="cs-img-caption">Annotated handoff: Status Gating</p>
+    </div>
+
+  </div>
+
+  <!-- 07 Results -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">07 · Results</div>
+    <h2 class="cs-pull">It launched,<br>and <em>users used it.</em></h2>
+    <p class="cs-body">The unified canvas launched successfully, with extremely positive UAT and post-launch feedback from users and stakeholders. More than 12 user-reported pain points were addressed across the three canvases. There have been no new bug tickets, errors, or frustration reports since launch. If anything, users are now asking for <strong>more capabilities within Automations</strong>, a sign the unified experience raised their confidence in the product.</p>
+
+
+    <div class="cs-stat">
+      <div class="cs-stat-num">~77%</div>
+      <p class="cs-stat-desc">Drop in median configuration time, from about 6 minutes to about 1 minute 21 seconds, as users got faster and more confident with the unified canvas.</p>
+
+    </div>
+
+    <p class="cs-body">Post-launch Amplitude data confirms adoption of every newly introduced interaction. All figures below are from launch to day 90.</p>
+
+    <div class="cs-metrics">
+      <div class="cs-metric">
+        <div class="cs-metric-num">909</div>
+        <div class="cs-metric-title">Node connections made</div>
+        <p class="cs-metric-desc">The primary canvas action. 720 condition-to-condition, 152 trigger-to-node, 37 action connections.</p>
+      </div>
+      <div class="cs-metric">
+        <div class="cs-metric-num">180</div>
+        <div class="cs-metric-title">Node duplications</div>
+        <p class="cs-metric-desc">134 condition nodes and 46 action nodes. A real pain point, confirmed by usage.</p>
+      </div>
+      <div class="cs-metric">
+        <div class="cs-metric-num">139</div>
+        <div class="cs-metric-title">Connection deletions</div>
+        <p class="cs-metric-desc">Confirms the friction of the old behavior was real.</p>
+      </div>
+      <div class="cs-metric">
+        <div class="cs-metric-num">27</div>
+        <div class="cs-metric-title">Insert node between connections</div>
+        <p class="cs-metric-desc">Smaller, but active adoption.</p>
+      </div>
+      <div class="cs-metric">
+        <div class="cs-metric-num">82%+</div>
+        <div class="cs-metric-title">Task completion rate</div>
+        <p class="cs-metric-desc">Of users who add a node, over 82% go on to configure and publish their automation.</p>
+      </div>
+      <div class="cs-metric">
+        <div class="cs-metric-num">22</div>
+        <div class="cs-metric-title">Automations published</div>
+        <p class="cs-metric-desc">Most contain 3–7 nodes. Users are building real, multi-step workflows.</p>
+      </div>
+    </div>
+
+    <div class="cs-fig" style="margin-top:4rem;">
+      <img src="../images/canvas-unification/chart-node-connections.png" alt="Amplitude chart: Automation Nodes Connected, 909 in the last 90 days">
+      <p class="cs-img-caption">Amplitude: Automation Nodes Connected, launch to day 90</p>
+    </div>
+    <div class="cs-fig">
+      <img src="../images/canvas-unification/chart-node-edge.png" alt="Amplitude chart: Automation Edge Selected by action type: delete_connection 139, select_only 130, insert_node 27">
+      <p class="cs-img-caption">Amplitude: Automation Edge Selected by action type, launch to day 90</p>
+    </div>
+
+    
+<div class="cs-callout">
+      <p>Status Gating showed the clearest behavior shift. Users naturally chose drag-and-drop (12 times) and the add node button (6 times) over the legacy on-screen button. The unified interaction pattern was internalized without friction. Edge insert was used just once, consistent with it being a power feature.</p>
+    </div>
+
+  </div>
+
+  <!-- 08 Outcome -->
+  <div class="cs-section reveal">
+    <div class="cs-section-label">08 · Outcome & Reflection</div>
+    <h2 class="cs-pull">Unified without<br><em>starting over.</em></h2>
+    <p class="cs-body">Three features that grew up separately now behave like one product. The unification worked because it respected what users had already learned: the research set the boundaries, the audit made the gaps visible, and the handoff left no room for ambiguity.</p>
+    <p class="cs-body">Known tickets addressed:</p>
+    <ul class="cs-bullets">
+      <li>Duplicate a node (all three canvases)</li>
+      <li>Multiple conditions per node (Automations, previously only in People Selection)</li>
+      <li>Delete or relink a connection without deleting the node (new in Automations, improved in People Selection and Status Gating)</li>
+    </ul>
+    <div class="cs-callout warm">
+      <p>What I took from it: a positive survey result wasn't a reason to under-deliver. It was a reason to be precise. Knowing what users were happy with let me spend the whole redesign on what they weren't. Consistency was the goal, but the improvements are what users noticed: they&rsquo;re now asking for more capabilities within Automations.</p>
+    </div>
+  </div>
+</div><!-- /cs-content -->
+
+<!-- NEXT CASE -->
+<a class="cs-next" href="carrier-rates.html">
+  <span class="cs-next-label">Back to the beginning</span>
+  <span class="cs-next-title">Invoicing: <em>Carrier Rates Redesign</em></span>
+</a>
+
+<!-- FOOTER -->
+<footer style="background:var(--obs); padding:3rem 2rem;">
+  <div style="max-width:960px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-family:var(--serif); font-size:13px; font-weight:300; color:rgba(254,252,249,0.6);">© 2026 Judy Lee</span>
+    <ul style="display:flex; gap:1.5rem; list-style:none;">
+      <li><a href="../index.html" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.6); text-decoration:none;">Home</a></li>
+      <li><a href="../index.html#work" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(254,252,249,0.6); text-decoration:none;">All Work</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  els.forEach(function(el) { io.observe(el); });
+  setTimeout(function() { els.forEach(function(el) { el.classList.add('visible'); }); }, 1000);
+</script>
+
+</body>
+</html>
