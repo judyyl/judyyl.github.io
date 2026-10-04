@@ -109,5 +109,5 @@ The site updates automatically within ~30 seconds.
 ## Fonts
 
 Both loaded from Google Fonts (no installation needed):
-- **Cormorant Garamond** — all display text, headings, pull quotes
+- **Newsreader** — all display text, headings, pull quotes
 - **DM Sans** — body text, labels, navigation

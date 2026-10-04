@@ -6,7 +6,7 @@
 <script>if(sessionStorage.getItem('jl_auth')!=='1'){window.location.replace('password.html');}</script>
 <title>About — Judy Lee</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --linen:  #FEFCF9;
@@ -21,7 +21,7 @@
     --obs:    #1A1612;
     --white:  #FFFFFF;
     --max:    960px;
-    --serif:  'Cormorant Garamond', Georgia, serif;
+    --serif:  'Newsreader', Georgia, serif;
     --sans:   'DM Sans', sans-serif;
   }
 
@@ -281,6 +281,10 @@
     text-align: right;
     white-space: nowrap;
   }
+  .exp-group { display: block; }
+  .exp-group .exp-sub-list { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-sub { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: baseline; }
+  .exp-sub-role { font-size: 12px; color: var(--wg); }
 
   /* CTA */
   .about-cta {
@@ -379,7 +383,7 @@
         </div>
         <div class="about-meta-item">
           <span class="about-meta-label">Currently</span>
-          <span class="about-meta-val">Lead Product Designer</span>
+          <span class="about-meta-val">Product Design Manager</span>
         </div>
         <div class="about-meta-item">
           <span class="about-meta-label">Contact</span>
@@ -396,7 +400,7 @@
       <div class="about-section reveal">
         <div class="about-section-label">Who I am</div>
         <h2>Designing for the workflows<br>that <em>matter most</em></h2>
-        <p class="about-body">I'm a lead product designer focused on enterprise and lab management software, where the stakes are high, workflows are complex, and good design directly impacts real people's productivity and livelihoods.</p>
+        <p class="about-body">I'm a product design manager focused on enterprise and lab management software, where the stakes are high, workflows are complex, and good design directly impacts real people's productivity and livelihoods. Alongside managing, I'm still hands-on: I continue to contribute to design work myself.</p>
         <p class="about-body">I work closely with developers, product managers, QA, data teams, and end users to uncover the real problem before proposing a solution. Design without research is just guessing.</p>
         <p class="about-body">A recurring theme in my career: being brought into complex, inherited work and quickly orienting to identify gaps, drive progress, and align stakeholders. I've grown comfortable in ambiguity — and I've learned that the best designs often come from asking the right questions, not having the right answers upfront.</p>
       </div>
@@ -414,18 +418,25 @@
           <div class="skill-item">Enterprise UX</div>
           <div class="skill-item">Usability Testing</div>
           <div class="skill-item">Cross-functional Collaboration</div>
+          <div class="skill-item">People Management</div>
+          <div class="skill-item">AI-Assisted Design</div>
+          <div class="skill-item">Figma Make</div>
+          <div class="skill-item">Claude</div>
         </div>
       </div>
 
       <div class="about-section reveal d2">
         <div class="about-section-label">Experience</div>
         <div class="exp-list">
-          <div class="exp-item">
+          <div class="exp-item exp-group">
             <div>
-              <div class="exp-role">Lead Product Designer</div>
-              <div class="exp-company">EKN</div>
+              <div class="exp-role">EKN</div>
+              <div class="exp-sub-list">
+                <div class="exp-sub"><span class="exp-sub-role">Product Design Manager</span><span class="exp-year">Jun 2026 — Present</span></div>
+                <div class="exp-sub"><span class="exp-sub-role">Lead Product Designer</span><span class="exp-year">Dec 2025 — Jun 2026</span></div>
+                <div class="exp-sub"><span class="exp-sub-role">Senior Product Designer</span><span class="exp-year">Jul 2025 — Dec 2025</span></div>
+              </div>
             </div>
-            <div class="exp-year">2025 — Present</div>
           </div>
           <div class="exp-item">
             <div>
@@ -447,6 +458,13 @@
               <div class="exp-company">ZUUM Transportation</div>
             </div>
             <div class="exp-year">Mar 2020 — Feb 2022</div>
+          </div>
+          <div class="exp-item">
+            <div>
+              <div class="exp-role">UI/UX Designer</div>
+              <div class="exp-company">FreshWorks Studio</div>
+            </div>
+            <div class="exp-year">Apr 2018 — Sep 2019</div>
           </div>
         </div>
       </div>
