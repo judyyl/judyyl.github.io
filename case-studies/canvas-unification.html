@@ -753,6 +753,47 @@
   .cs-threeup figure { margin: 0; line-height: 0; }
   .cs-threeup img { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 8px 40px rgba(26,22,18,0.12), 0 2px 12px rgba(26,22,18,0.06); }
   .cs-threeup .cs-img-caption { line-height: 1.5; padding-top: 1rem; }
+
+  /* TL;DR */
+  .cs-tldr-wrap { max-width: var(--max); margin: 0 auto; padding: 3rem 2rem 3.5rem; }
+  .cs-tldr { background: #F3EEE6; padding: 32px; }
+  .cs-tldr-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 1rem;
+  }
+  .cs-tldr-row {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid #D9C9B0;
+    align-items: baseline;
+  }
+  .cs-tldr-key {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #5C5348;
+  }
+  .cs-tldr-text {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #3D3835;
+    margin: 0;
+  }
+  @media (max-width: 640px) {
+    .cs-tldr { padding: 24px; }
+    .cs-tldr-row { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
 </style>
 </head>
 <body>
@@ -803,6 +844,16 @@
       <span class="cs-meta-label">Platform</span>
       <span class="cs-meta-val">Web — Canvas</span>
     </div>
+  </div>
+</div>
+
+<!-- TL;DR -->
+<div class="cs-tldr-wrap">
+  <div class="cs-tldr">
+    <div class="cs-tldr-label">TL;DR</div>
+    <div class="cs-tldr-row"><span class="cs-tldr-key">Problem</span><p class="cs-tldr-text">Three canvas features were built separately and behaved differently, driving a backlog of tickets.</p></div>
+    <div class="cs-tldr-row"><span class="cs-tldr-key">Role</span><p class="cs-tldr-text">Lead designer. I audited all three and designed one shared system.</p></div>
+    <div class="cs-tldr-row"><span class="cs-tldr-key">Result</span><p class="cs-tldr-text">Median configuration time fell from ~6 min to ~1:21, with no new bugs after launch.</p></div>
   </div>
 </div>
 
@@ -1125,9 +1176,9 @@
 </div><!-- /cs-content -->
 
 <!-- NEXT CASE -->
-<a class="cs-next" href="carrier-rates.html">
-  <span class="cs-next-label">Back to the beginning</span>
-  <span class="cs-next-title">Invoicing: <em>Carrier Rates Redesign</em></span>
+<a class="cs-next" href="related-cases.html">
+  <span class="cs-next-label">Next case study</span>
+  <span class="cs-next-title">Related Cases: <em>Return Entry Redesign</em></span>
 </a>
 
 <!-- FOOTER -->

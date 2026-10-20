@@ -5,21 +5,17 @@
 ```
 judylee-portfolio/
 ├── index.html                        ← Landing page
+├── about.html
+├── password.html
 ├── case-studies/
-│   ├── carrier-rates.html            ← Case study 01
-│   ├── related-cases.html            ← Case study 02 (duplicate template)
-│   └── multiple-queues.html          ← Case study 03 (duplicate template)
+│   ├── canvas-unification.html       ← Case study 01
+│   ├── related-cases.html            ← Case study 02
+│   └── multiple-queues.html          ← Case study 03
 ├── images/
-│   ├── carrier-rates/
-│   │   ├── cover.png                 ← Hero image (shown on landing + case study top)
-│   │   ├── current-flow.png          ← Discovery section screenshot
-│   │   ├── exploration-01.png        ← Exploration 01 screenshot
-│   │   ├── exploration-03.png        ← Exploration 03 screenshot
-│   │   └── final-design.png          ← Final design screenshot
+│   ├── canvas-unification/
 │   ├── related-cases/
-│   │   └── cover.png
 │   └── multiple-queues/
-│       └── cover.png
+├── _shelved/                         ← Paused case studies (not published by GitHub Pages)
 └── README.md
 ```
 
@@ -30,7 +26,7 @@ judylee-portfolio/
 1. Export your screens from Figma:
    - Select the frame → Export → PNG → 2x scale
 2. Name the file to match what's in the HTML (e.g. `cover.png`)
-3. Drop it into the correct folder (e.g. `images/carrier-rates/`)
+3. Drop it into the correct folder (e.g. `images/canvas-unification/`)
 4. The site will automatically show your image instead of the placeholder
 
 ---

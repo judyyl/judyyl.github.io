@@ -158,6 +158,11 @@
     margin-bottom: 4px;
   }
   .cs-meta-val { font-size: 13px; color: var(--obs); }
+  @media (max-width: 640px) {
+    .cs-meta-inner { grid-template-columns: repeat(2, 1fr); }
+    .cs-meta-item:nth-child(2) { border-right: none; }
+    .cs-meta-item:nth-child(-n+2) { border-bottom: 1px solid var(--sand); }
+  }
 
   /* COVER */
   .cs-cover {
@@ -539,6 +544,47 @@
   }
   @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
   @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  /* TL;DR */
+  .cs-tldr-wrap { max-width: var(--max); margin: 0 auto; padding: 3rem 2rem 3.5rem; }
+  .cs-tldr { background: #F3EEE6; padding: 32px; }
+  .cs-tldr-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 1rem;
+  }
+  .cs-tldr-row {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid #D9C9B0;
+    align-items: baseline;
+  }
+  .cs-tldr-key {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #5C5348;
+  }
+  .cs-tldr-text {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #3D3835;
+    margin: 0;
+  }
+  @media (max-width: 640px) {
+    .cs-tldr { padding: 24px; }
+    .cs-tldr-row { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
 </style>
 </head>
 <body>
@@ -587,6 +633,16 @@
       <span class="cs-meta-label">Platform</span>
       <span class="cs-meta-val">Web — Dashboard</span>
     </div>
+  </div>
+</div>
+
+<!-- TL;DR -->
+<div class="cs-tldr-wrap">
+  <div class="cs-tldr">
+    <div class="cs-tldr-label">TL;DR</div>
+    <div class="cs-tldr-row"><span class="cs-tldr-key">Problem</span><p class="cs-tldr-text">A new client needed multiple work queues in a lead dashboard, and I had no access to its users.</p></div>
+    <div class="cs-tldr-row"><span class="cs-tldr-key">Role</span><p class="cs-tldr-text">Product designer. I researched, explored three structures, and ran usability testing.</p></div>
+    <div class="cs-tldr-row"><span class="cs-tldr-key">Result</span><p class="cs-tldr-text">Side navigation shipped. Testing with five participants changed two decisions before launch.</p></div>
   </div>
 </div>
 
@@ -863,10 +919,10 @@
   </div>
 </div>
 
-<!-- NEXT CASE — loops back to case 01 -->
-<a class="cs-next" href="carrier-rates.html">
+<!-- NEXT CASE -->
+<a class="cs-next" href="canvas-unification.html">
   <span class="cs-next-label">Back to the beginning</span>
-  <span class="cs-next-title">Invoicing: <em>Carrier Rates Redesign</em></span>
+  <span class="cs-next-title">Canvas Unification <em>Initiative</em></span>
 </a>
 
 <!-- FOOTER -->
