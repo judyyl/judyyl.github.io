@@ -4,9 +4,12 @@
 
 ```
 judylee-portfolio/
-├── index.html                        ← Landing page
-├── about.html
-├── password.html
+├── index.html                        ← Home: hero, selected work, about
+├── about.html                        ← Redirects to index.html#about
+├── password.html                     ← Password gate
+├── assets/
+│   ├── site.css                      ← Shared styles (all pages)
+│   └── case-study.js                 ← "On this page" scrollspy + click-to-section snap
 ├── case-studies/
 │   ├── canvas-unification.html       ← Case study 01
 │   ├── related-cases.html            ← Case study 02
@@ -18,6 +21,8 @@ judylee-portfolio/
 ├── _shelved/                         ← Paused case studies (not published by GitHub Pages)
 └── README.md
 ```
+
+Every page keeps the password check as the first script in `<head>`.
 
 ---
 

@@ -1,641 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>if(sessionStorage.getItem('jl_auth')!=='1'){window.location.replace('password.html');}</script>
-<title>Judy Lee — Product Designer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4F4F2">
+<title>Judy Lee | Product Designer</title>
+<meta name="description" content="Judy Lee is a product designer for complex enterprise software. Selected case studies and experience.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  /* ── TOKENS ── */
-  :root {
-    --linen:    #FEFCF9;
-    --wl:       #F3EEE6;
-    --sand:     #D9C9B0;
-    --wg:       #6B6560;
-    --lg:       #C4BDB6;
-    --slt:      #EAF1F8;
-    --smid:     #8AAAC8;
-    --slate:    #4A72A0;
-    --sdeep:    #2E557A;
-    --sdk:      #1E3448;
-    --obs:      #1A1612;
-    --white:    #FFFFFF;
-    --max:      960px;
-    --serif:    'Newsreader', Georgia, serif;
-    --sans:     'DM Sans', sans-serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--linen);
-    color: var(--obs);
-    font-family: var(--sans);
-    font-weight: 300;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(254,252,249,0.94);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--sand);
-  }
-  .nav-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 0 2rem;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .nav-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-decoration: none;
-    gap: 0;
-  }
-  .nav-logo-text {
-    font-family: var(--serif);
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--obs);
-    line-height: 1;
-  }
-  .nav-logo-rule {
-    width: 100%;
-    height: 1px;
-    background: var(--slate);
-    margin-top: 4px;
-  }
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    align-items: center;
-  }
-  .nav-links a {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--wg);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--obs); }
-  .nav-cta {
-    font-size: 10px !important;
-    letter-spacing: 0.1em !important;
-    font-weight: 500 !important;
-    color: var(--white) !important;
-    background: var(--obs);
-    padding: 7px 16px;
-    transition: background 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--sdk) !important; color: var(--white) !important; }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 2rem 80px;
-  }
-  .hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--wg);
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.2s forwards;
-  }
-  .hero-eyebrow-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--slate);
-    flex-shrink: 0;
-  }
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(2.6rem, 6vw, 5rem);
-    font-weight: 300;
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    max-width: 880px;
-    margin: 0 auto 2rem;
-    text-wrap: balance;
-    opacity: 0;
-    animation: fadeUp 1.1s ease 0.1s forwards;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--slate);
-  }
-  .hero-rule {
-    width: 48px;
-    height: 1px;
-    background: var(--slate);
-    margin: 0 auto 2rem;
-    opacity: 0;
-    animation: fadeIn 1s ease 0.5s forwards;
-  }
-  .hero-desc {
-    font-size: 14px;
-    line-height: 1.85;
-    color: var(--wg);
-    max-width: 480px;
-    margin: 0 auto 3rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.5s forwards;
-  }
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--obs);
-    text-decoration: none;
-    border-bottom: 1px solid var(--obs);
-    padding-bottom: 3px;
-    transition: color 0.2s, border-color 0.2s;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.65s forwards;
-  }
-  .hero-cta:hover { color: var(--slate); border-color: var(--slate); }
-  .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0;
-    animation: fadeIn 1s ease 1s forwards;
-  }
-  .hero-scroll span {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--lg);
-  }
-  .hero-scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--lg), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-
-  /* ── SECTION SHARED ── */
-  .section {
-    padding: 6rem 2rem;
-  }
-  .section-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-  }
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--wg);
-    margin-bottom: 3rem;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--sand);
-  }
-
-  /* ── WORK ── */
-  .work-section { background: var(--linen); }
-  .work-intro {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  .work-intro h2 {
-    font-family: var(--serif);
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 300;
-    line-height: 1.05;
-    margin-bottom: 1rem;
-  }
-  .work-intro h2 em { font-style: italic; color: var(--slate); }
-  .work-intro p {
-    font-size: 13px;
-    color: var(--wg);
-    line-height: 1.8;
-    max-width: 460px;
-    margin: 0 auto;
-  }
-
-  /* Project list — Alice Gao style: stacked, image-led */
-  .project-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8rem;
-    padding-top: 1rem;
-  }
-
-  .project-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
-
-  .project-img {
-    background: var(--wl);
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    border-radius: 8px;
-    line-height: 0;
-    box-shadow: 0 4px 28px rgba(26,22,18,0.08), 0 1px 6px rgba(26,22,18,0.04);
-  }
-  .project-img img {
-    width: 100%;
-    display: block;
-    object-fit: contain;
-    transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
-    border-radius: 8px;
-  }
-  .project-item:hover .project-img img { transform: scale(1.02); }
-
-  /* Placeholder when no image */
-  .project-img-placeholder {
-    height: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-  .placeholder-num {
-    font-family: var(--serif);
-    font-size: 5rem;
-    font-weight: 300;
-    color: var(--sand);
-    line-height: 1;
-  }
-  .placeholder-label {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--lg);
-  }
-
-  .project-info {
-    padding: 1.5rem 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 2rem;
-  }
-  .project-info-left { flex: 1; }
-  .project-tag {
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--wg);
-    margin-bottom: 0.5rem;
-    display: block;
-  }
-  .project-name {
-    font-family: var(--serif);
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-    transition: color 0.2s;
-  }
-  .project-item:hover .project-name { color: var(--slate); }
-  .project-desc {
-    font-size: 12px;
-    line-height: 1.8;
-    color: var(--wg);
-    max-width: 560px;
-  }
-  .project-cta {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--slate);
-    border-bottom: 1px solid var(--slate);
-    padding-bottom: 2px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: opacity 0.2s;
-    opacity: 0;
-    align-self: flex-end;
-  }
-  .project-item:hover .project-cta { opacity: 1; }
-
-
-  /* ── ABOUT ── */
-  .about-section { background: var(--obs); color: var(--linen); }
-  .about-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-  .about-left h2 {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    margin-bottom: 2rem;
-  }
-  .about-left h2 em { font-style: italic; color: var(--smid); }
-  .about-label {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--smid);
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    display: block;
-  }
-  .about-right p {
-    font-size: 13px;
-    line-height: 1.95;
-    color: rgba(254,252,249,0.55);
-    margin-bottom: 1rem;
-  }
-  .skills-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 1.5rem;
-  }
-  .skill {
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--smid);
-    border: 1px solid rgba(138,170,200,0.3);
-    padding: 4px 10px;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .skill:hover { border-color: var(--smid); color: var(--linen); }
-
-  /* ── CONTACT ── */
-  .contact-section {
-    background: var(--wl);
-    border-top: 1px solid var(--sand);
-    text-align: center;
-    padding: 7rem 2rem;
-  }
-  .contact-inner { max-width: var(--max); margin: 0 auto; }
-  .contact-label {
-    font-size: 9px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--wg);
-    margin-bottom: 1.5rem;
-    display: block;
-  }
-  .contact-title {
-    font-family: var(--serif);
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 300;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 2.5rem;
-  }
-  .contact-title em { font-style: italic; color: var(--slate); }
-  .contact-email {
-    font-family: var(--serif);
-    font-size: clamp(1.1rem, 2.5vw, 1.8rem);
-    font-weight: 300;
-    color: var(--obs);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    border-bottom: 1px solid var(--obs);
-    padding-bottom: 3px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .contact-email:hover { color: var(--slate); border-color: var(--slate); }
-  .contact-note {
-    font-size: 12px;
-    color: var(--wg);
-    margin-top: 1.5rem;
-    line-height: 1.7;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--obs);
-    padding: 3rem 2rem;
-  }
-  .footer-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-copy {
-    font-family: var(--serif);
-    font-size: 13px;
-    font-weight: 300;
-    color: rgba(254,252,249,0.6);
-  }
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-  }
-  .footer-links a {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(254,252,249,0.6);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--linen); }
-
-  /* ── REVEAL ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-  .d1 { transition-delay: 0.1s; }
-  .d2 { transition-delay: 0.2s; }
-  .d3 { transition-delay: 0.3s; }
-
-  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
-  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-  @keyframes scrollPulse { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <span class="nav-logo-text">JL</span>
-      <span class="nav-logo-rule"></span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
+<header class="site">
+  <div class="wrap">
+    <a class="mark" href="index.html" aria-label="Judy Lee, home"><span>JL</span><i></i></a>
+    <nav class="main" aria-label="Primary">
+      <a href="index.html" aria-current="true">Work</a>
+      <a href="#about">About</a>
+    </nav>
   </div>
-</nav>
+</header>
+<main id="view-home">
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Product designer</p>
+      <h1>Product design for complex enterprise software.</h1>
+      <p class="lede">I untangle inherited, inconsistent workflows into products people can use. I lead a small design team while staying hands-on.</p>
+      <a class="btn" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+    </section>
 
-<!-- HERO -->
-<section class="hero" style="position:relative;">
-  <div class="hero-eyebrow">
-    Product Designer
+    <section class="block" id="work">
+      <div class="sechead">
+        <p class="label">Selected work</p>
+        <h2 class="sec">Making complex workflows feel simple.</h2>
+      </div>
+      <div class="work">
+        <article class="card">
+          <div class="shot"><img width="5760" height="3240" src="images/canvas-unification/cover-homepage.png" alt="The redesigned Automation Builder canvas with pill indicator nodes"></div>
+          <div>
+            <p class="label">Enterprise workflow canvases · 2026</p>
+            <h3>Canvas Unification Initiative</h3>
+            <p>Three canvases, built over time and never reconciled. One consistent experience, without making users relearn a thing.</p>
+            <a class="go" href="case-studies/canvas-unification.html">Read the case study →</a>
+          </div>
+        </article>
+      </div>
+      <div class="work" style="margin-top:0">
+        <article class="card">
+          <div class="shot"><img width="3840" height="2160" src="images/related-cases/cover.png" alt="Related cases side panel in the lab management system"></div>
+          <div>
+          <p class="label">Lab management system · 2024</p>
+          <h3>Related Cases: Return Entry Redesign</h3>
+          <p>Inherited a shelved solution, a hard deadline, and a team expecting the impossible. Here’s what shipped.</p>
+          <a class="go" href="case-studies/related-cases.html">Read the case study →</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="shot"><img width="2880" height="1914" src="images/multiple-queues/cover-homepage.png" alt="Multiple queues lead dashboard"></div>
+          <div>
+          <p class="label">Lead management · 2022</p>
+          <h3>Multiple Queues: One Dashboard, Every Lead</h3>
+          <p>No direct user access. No clear requirements. Just a hard deadline and a client who needed something that didn’t exist yet.</p>
+          <a class="go" href="case-studies/multiple-queues.html">Read the case study →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="about">
+      <div class="about">
+        <div>
+          <p class="label">About</p>
+          <h2 class="sec">Designing for the workflows that matter most.</h2>
+        </div>
+        <div>
+          <p>Product designer with 7+ years in complex enterprise software, specializing in untangling inherited, inconsistent workflows into products people can use. Currently lead a small design team while staying hands-on.</p>
+          <p class="muted">Based in Orange County, CA.</p>
+          <div class="xp" role="list">
+            <div role="listitem"><span>EKN · Design Manager</span><span>Jun 2026 to Present</span></div>
+            <div role="listitem"><span>EKN · Lead Product Designer</span><span>Jul 2025 to Jun 2026</span></div>
+            <div role="listitem"><span>Glidewell Dental · Senior Product Designer</span><span>Jan 2023 to Apr 2025</span></div>
+            <div role="listitem"><span>Loyal Health · Product Designer</span><span>Feb 2022 to Dec 2022</span></div>
+            <div role="listitem"><span>ZUUM Transportation · UX Designer</span><span>Mar 2020 to Feb 2022</span></div>
+            <div role="listitem"><span>FreshWorks Studio · UI/UX Designer</span><span>Apr 2018 to Sep 2019</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
-  <h1 class="hero-title">
-    Product designer for complex enterprise software.
-  </h1>
-  <div class="hero-rule"></div>
-  <p class="hero-desc">
-    I untangle inherited, inconsistent workflows into products people can use, and I lead a small design team while staying hands-on.
-  </p>
-  <a href="#work" class="hero-cta">View selected work →</a>
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
-  </div>
-</section>
+  <footer class="site"><div class="in"><span class="copy-t">© 2026 Judy Lee</span><ul><li><a href="https://www.judylee.design" target="_blank" rel="noopener">Website</a></li><li><a href="https://www.linkedin.com/in/judylee73/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:judylee791@gmail.com">Email</a></li></ul></div></footer>
+</main>
 
-<!-- WORK -->
-<section class="section work-section" id="work">
-  <div class="section-inner">
-    <div class="section-label">Selected Work</div>
-    <div class="work-intro reveal">
-      <h2>Recent <em>projects</em></h2>
-    </div>
-
-    <div class="project-list">
-
-      <!-- Project 01 -->
-      <a class="project-item reveal" href="case-studies/canvas-unification.html">
-        <div class="project-img">
-          <img src="images/canvas-unification/cover-homepage.png" alt="Canvas Unification Initiative"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-img-placeholder" style="display:none;">
-            <span class="placeholder-num">01</span>
-            <span class="placeholder-label">Canvas Unification Initiative</span>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-info-left">
-            <span class="project-tag">Enterprise Workflow Canvases · Design Systems · 2026</span>
-            <h3 class="project-name">Canvas Unification Initiative</h3>
-            <p class="project-desc">Three canvases, built over time and never reconciled. One consistent experience, without making users relearn a thing.</p>
-          </div>
-          <span class="project-cta">View case study →</span>
-        </div>
-      </a>
-
-      <!-- Project 02 -->
-      <a class="project-item reveal d1" href="case-studies/related-cases.html">
-        <div class="project-img">
-          <img src="images/related-cases/cover.png" alt="Related Cases Return Entry Redesign"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-img-placeholder" style="display:none;">
-            <span class="placeholder-num">02</span>
-            <span class="placeholder-label">Related Cases: Return Entry Redesign</span>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-info-left">
-            <span class="project-tag">Lab Management System · Return Workflow · 2024</span>
-            <h3 class="project-name">Related Cases: Return Entry Redesign</h3>
-            <p class="project-desc">Inherited a shelved solution, a hard deadline, and a team expecting the impossible. Here's what shipped.</p>
-          </div>
-          <span class="project-cta">View case study →</span>
-        </div>
-      </a>
-
-      <!-- Project 03 -->
-      <a class="project-item reveal d2" href="case-studies/multiple-queues.html">
-        <div class="project-img">
-          <img src="images/multiple-queues/cover.png" alt="Multiple Queues Lead Management"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-img-placeholder" style="display:none;">
-            <span class="placeholder-num">03</span>
-            <span class="placeholder-label">Multiple Queues: One Dashboard, Every Lead</span>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-info-left">
-            <span class="project-tag">Lead Management · Dashboard Design · 2022</span>
-            <h3 class="project-name">Multiple Queues: One Dashboard, Every Lead</h3>
-            <p class="project-desc">No direct user access. No clear requirements. Just a hard deadline and a client who needed something that didn't exist yet.</p>
-          </div>
-          <span class="project-cta">View case study →</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <span class="footer-copy">© 2026 Judy Lee</span>
-    <ul class="footer-links">
-      <li><a href="https://www.judylee.design" target="_blank">Website</a></li>
-      <li><a href="https://www.linkedin.com/in/judylee73/" target="_blank">LinkedIn</a></li>
-    </ul>
-  </div>
-</footer>
-
-<script>
-  var els = document.querySelectorAll('.reveal');
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  els.forEach(function(el) { io.observe(el); });
-  setTimeout(function() { els.forEach(function(el) { el.classList.add('visible'); }); }, 1000);
-</script>
 </body>
 </html>
