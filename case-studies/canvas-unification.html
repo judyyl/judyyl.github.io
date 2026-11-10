@@ -17,7 +17,7 @@
   <div class="wrap">
     <a class="mark" href="../index.html" aria-label="Judy Lee, home"><span>JL</span><i></i></a>
     <nav class="main" aria-label="Primary">
-      <a href="../index.html">Work</a>
+      <a href="../index.html#work">Work</a>
       <a href="../index.html#about">About</a>
     </nav>
   </div>
@@ -72,8 +72,11 @@
       <h2 class="sec">Three canvases. <em>Each better than the last.</em> None reconciled.</h2>
       <div class="prose" style="margin-top:24px">
         <p><strong>over.vu</strong> is an internal civil engineering project management application used company-wide to manage client work. Three of its features are canvas-based: <strong>Automation Builder</strong>, <strong>People Selection</strong>, and <strong>Status Gating</strong>.</p>
-        <p>Each canvas was built sequentially, and each improved on the one before it. But none of them was ever brought back in line with the others. The result was an inconsistent experience across all three, and a backlog of user support tickets for each.</p>
-        <p>The canvases didn’t just look different, they behaved differently. Duplicating a node wasn’t possible on any of them. Multiple conditions per node worked in People Selection and Status Gating, but not in Automations. Deleting a connection on its own worked in People Selection, worked differently in Status Gating, and wasn’t possible in Automations, where removing a connection meant deleting a node.</p>
+      </div>
+      <div class="callout"><p class="eyebrow" style="color:var(--accent);margin-bottom:10px">The problem</p><p class="quote">Three canvases that behaved differently from each other: an inconsistent experience across all three, and a backlog of user support tickets for each.</p></div>
+      <div class="prose" style="margin-top:32px">
+        <p>Each canvas was built sequentially, and each improved on the one before it. But none of them was ever brought back in line with the others.</p>
+        <p>The canvases didn’t just look different, they behaved differently. Duplicating a node wasn’t possible on any of them, and in Automations, removing a connection meant deleting a node.</p>
         <p>As Lead Product Designer, I inherited the inconsistency. My job was to unify the three without making users relearn everything they already knew.</p>
       </div>
       <div class="trio"><figure class="fig"><img width="6144" height="3117" src="../images/canvas-unification/context-before-automations.png" alt="Automation Builder before"><figcaption>Before · Automation Builder</figcaption></figure><figure class="fig"><img width="6144" height="3117" src="../images/canvas-unification/context-before-pse.png" alt="People Selection before"><figcaption>Before · People Selection</figcaption></figure><figure class="fig"><img width="6144" height="3117" src="../images/canvas-unification/context-before-status.png" alt="Status Gating before"><figcaption>Before · Status Gating</figcaption></figure></div>
@@ -100,8 +103,7 @@
       <h2 class="sec">Document everything. <em>Design within what’s buildable.</em></h2>
       <div class="prose" style="margin-top:24px"><p>I audited each canvas end to end, documenting screens, nodes, conditions, actions, and interactions. I referenced the React Flow library throughout, so every design change stayed technically feasible.</p></div>
       <div style="margin-top:36px"><figure class="fig"><img width="4224" height="1890" src="../images/canvas-unification/audit-board.png" alt="Audit board mapping screens, nodes, conditions and actions across all three canvases"><figcaption>The audit board: screens, nodes, conditions and actions across all three canvases</figcaption></figure></div>
-      <div class="prose" style="margin-top:40px"><p>Three working relationships kept the project aligned from start to finish:</p></div>
-      <ul class="bullets" style="margin-top:8px"><li><strong>Dev leads:</strong> regular syncs to validate feasibility as designs evolved</li><li><strong>PM:</strong> coverage check to make sure every addressable pain point was in scope</li><li><strong>Other designers:</strong> coordination wherever their work intersected with the canvas</li></ul>
+      <div class="prose" style="margin-top:40px"><p>Dev leads validated feasibility in regular syncs as the designs evolved, the PM checked that every addressable pain point was in scope, and I coordinated with other designers wherever their work intersected with the canvas.</p></div>
       <div class="callout"><p>The guiding rule was to simplify the visuals, preserve the flows. Condition and action flows stayed as they were, so users kept the muscle memory they’d already built.</p></div>
       <h3 class="sub3">Node exploration</h3>
       <div>
@@ -127,9 +129,9 @@
     <section class="block" id="cs-output">
       <p class="label">06 / Output</p>
       <h2 class="sec">Designed to ship, <em>documented to last.</em></h2>
-      <div class="prose" style="margin-top:24px"><p>The deliverable was an <strong>extensive annotated handoff</strong> with a detailed breakdown of the specific changes across all three features. Alongside it, the full canvas audit gave engineering and QA a shared reference for what each canvas did before, and what it should do now.</p></div>
-      <ul class="bullets" style="margin-top:12px"><li>Full audit of all three canvases: screens, nodes, conditions, actions, interactions</li><li>Redesigned node system with pill indicators</li><li>Annotated handoff with change-by-change breakdown across Automation Builder, People Selection, and Status Gating</li><li>Launched with full cross-functional alignment across design, engineering, and QA</li></ul>
-      <div class="stack"><figure class="fig"><img width="5760" height="3405" src="../images/canvas-unification/handoff-annotations-01automations.png" alt="Annotated handoff: Automation Builder"><figcaption>Annotated handoff: Automation Builder</figcaption></figure><figure class="fig"><img width="5760" height="3405" src="../images/canvas-unification/handoff-annotations-02pse.png" alt="Annotated handoff: People Selection"><figcaption>Annotated handoff: People Selection</figcaption></figure><figure class="fig"><img width="5760" height="3240" src="../images/canvas-unification/handoff-annotations-03status.png" alt="Annotated handoff: Status Gating"><figcaption>Annotated handoff: Status Gating</figcaption></figure></div>
+      <div class="prose" style="margin-top:24px"><p>The deliverable was an <strong>extensive annotated handoff for each of the three canvases</strong>: Automation Builder, People Selection, and Status Gating, each with a change-by-change breakdown. Alongside it, the full canvas audit gave engineering and QA a shared reference for what each canvas did before, and what it should do now.</p></div>
+      <ul class="bullets" style="margin-top:12px"><li>Full audit of all three canvases: screens, nodes, conditions, actions, interactions</li><li>Launched with full cross-functional alignment across design, engineering, and QA</li></ul>
+      <div class="stack"><figure class="fig"><img width="5760" height="3405" src="../images/canvas-unification/handoff-annotations-01automations.png" alt="Annotated handoff: Automation Builder"><figcaption>Annotated handoff, Automation Builder. People Selection and Status Gating each had one in the same format.</figcaption></figure></div>
     </section>
 
     <section class="block" id="cs-results">
@@ -142,19 +144,15 @@
         <div><p class="num">909</p><b>Node connections made</b><p>The primary canvas action. 720 condition-to-condition, 152 trigger-to-node, 37 action connections.</p></div>
         <div><p class="num">180</p><b>Node duplications</b><p>134 condition nodes and 46 action nodes. A real pain point, confirmed by usage.</p></div>
         <div><p class="num">139</p><b>Connection deletions</b><p>Confirms the friction of the old behavior was real.</p></div>
-        <div><p class="num">27</p><b>Insert node between connections</b><p>Smaller, but active adoption.</p></div>
         <div><p class="num">82%+</p><b>Task completion rate</b><p>Of users who add a node, over 82% go on to configure and publish their automation.</p></div>
-        <div><p class="num">22</p><b>Automations published</b><p>Most contain 3–7 nodes. Users are building real, multi-step workflows.</p></div>
       </div>
-      <div class="stack" style="margin-top:44px"><figure class="fig"><img width="6132" height="2277" src="../images/canvas-unification/chart-node-connections.png" alt="Amplitude chart: Automation Nodes Connected, 909 in the last 90 days"><figcaption>Amplitude: Automation Nodes Connected, launch to day 90</figcaption></figure><figure class="fig"><img width="6114" height="2547" src="../images/canvas-unification/chart-node-edge.png" alt="Amplitude chart: Automation Edge Selected by action type"><figcaption>Amplitude: Automation Edge Selected by action type, launch to day 90</figcaption></figure></div>
-      <div class="callout"><p>Status Gating showed the clearest behavior shift. Users naturally chose drag-and-drop (12 times) and the add node button (6 times) over the legacy on-screen button. The unified interaction pattern was internalized without friction. Edge insert was used just once, consistent with it being a power feature.</p></div>
+      <div class="callout"><p>Status Gating showed the clearest behavior shift. Users chose drag-and-drop (12 times) and the add node button (6 times) over the legacy on-screen button, so the unified pattern was picked up without friction.</p></div>
     </section>
 
     <section class="block" id="cs-reflection">
       <p class="label">08 / Outcome &amp; reflection</p>
       <h2 class="sec">Unified without <em>starting over.</em></h2>
-      <div class="prose" style="margin-top:24px"><p>Three features that grew up separately now behave like one product. The unification worked because it respected what users had already learned: the research set the boundaries, the audit made the gaps visible, and the handoff left no room for ambiguity.</p><p>Known tickets addressed:</p></div>
-      <ul class="bullets" style="margin-top:8px"><li>Duplicate a node (all three canvases)</li><li>Multiple conditions per node (Automations, previously only in People Selection)</li><li>Delete or relink a connection without deleting the node (new in Automations, improved in People Selection and Status Gating)</li></ul>
+      <div class="prose" style="margin-top:24px"><p>Three features that grew up separately now behave like one product. The unification worked because it respected what users had already learned: the research set the boundaries, the audit made the gaps visible, and the handoff left no room for ambiguity.</p></div>
       <div class="callout"><p><strong>What I took from it:</strong> a positive survey result wasn’t a reason to under-deliver. It was a reason to be precise. Knowing what users were happy with let me spend the whole redesign on what they weren’t. Consistency was the goal, but the improvements are what users noticed: they’re now asking for more capabilities within Automations.</p></div>
     </section>
 
