@@ -53,10 +53,10 @@
         <li><button type="button" data-scroll="rc-goal" data-toc="rc-goal"><span>02</span>Goal</button></li>
         <li><button type="button" data-scroll="rc-research" data-toc="rc-research"><span>03</span>Research</button></li>
         <li><button type="button" data-scroll="rc-insight" data-toc="rc-insight"><span>04</span>Key insight</button></li>
-        <li><button type="button" data-scroll="rc-challenges" data-toc="rc-challenges"><span>05</span>Challenges</button></li>
-        <li><button type="button" data-scroll="rc-explore" data-toc="rc-explore"><span>06</span>Explorations</button></li>
-        <li><button type="button" data-scroll="rc-final" data-toc="rc-final"><span>07</span>Final design</button></li>
-        <li><button type="button" data-scroll="rc-outcome" data-toc="rc-outcome"><span>08</span>Outcome</button></li>
+        <li><button type="button" data-scroll="rc-explore" data-toc="rc-explore"><span>05</span>Explorations</button></li>
+        <li><button type="button" data-scroll="rc-final" data-toc="rc-final"><span>06</span>Final design</button></li>
+        <li><button type="button" data-scroll="rc-outcome" data-toc="rc-outcome"><span>07</span>Outcome</button></li>
+        <li><button type="button" data-scroll="rc-challenges" data-toc="rc-challenges"><span>08</span>Challenges</button></li>
       </ol>
     </div>
     <div class="cs-main">
@@ -99,17 +99,8 @@
       <div class="prose" style="margin-top:28px"><p>A key component of creating returns is the ability to link related cases, a capability that had to be supported at case entry, just as it was in the legacy system. What started as a functional requirement became a hidden win: preserving a familiar interaction pattern gave users something recognizable in an otherwise new environment.</p></div>
     </section>
 
-    <section class="block" id="rc-challenges">
-      <p class="label">05 / Challenges</p>
-      <h2 class="sec">What made this hard, and what I did <em>about it.</em></h2>
-      <div style="margin-top:36px">
-        <div class="challenge"><span class="rownum">01</span><div><h4>Taking on a complex problem with little business knowledge</h4><p>As the newest member of the team, I had limited understanding of the business and almost no familiarity with the design work done before my arrival. Getting up to speed quickly wasn’t optional, because the deadline was already close.</p><p style="margin-top:12px"><strong>What I did:</strong> I connected with stakeholders directly to gain business context, and collaborated with fellow designers to review previous documentation and design decisions. The time investment gave me the foundation I needed to make informed decisions rather than assumptions.</p></div></div>
-        <div class="challenge"><span class="rownum">02</span><div><h4>Designing for MVP with significant constraints</h4><p>Replacing a robust legacy system with an MVP is never straightforward, especially when the business workflow is complex and edge cases are everywhere. The scope had already been cut once, and I was designing within what remained.</p><p style="margin-top:12px"><strong>What I did:</strong> I kept the first release in perspective: it’s a starting point, not a final answer. I communicated regularly with engineers to align on what was technically feasible, making deliberate compromises that didn’t close the door on future improvements.</p></div></div>
-      </div>
-    </section>
-
     <section class="block" id="rc-explore">
-      <p class="label">06 / Explorations</p>
+      <p class="label">05 / Explorations</p>
       <h2 class="sec">Three structures. <em>One familiar answer.</em></h2>
       <div class="prose" style="margin-top:24px"><p>I explored three approaches for surfacing related cases within the case entry flow, each balancing visibility, familiarity, and the complexity of the information being presented.</p></div>
       <div style="margin-top:32px">
@@ -121,7 +112,7 @@
     </section>
 
     <section class="block" id="rc-final">
-      <p class="label">07 / Final design</p>
+      <p class="label">06 / Final design</p>
       <h2 class="sec">What shipped, and why <em>each decision mattered.</em></h2>
       <div style="margin-top:24px">
         <div class="feature"><figure class="fig"><img width="3840" height="2160" src="../images/related-cases/feature-01-panel.png" alt="Related cases side panel"></figure><div class="text"><p class="label">01</p><h3 class="t3">Related cases side panel</h3><p>Related cases surface automatically based on account number and provider number, with filtering by product. Users can scan the full list without leaving the case entry flow, with no additional clicks required to see what’s there.</p></div></div>
@@ -132,13 +123,22 @@
     </section>
 
     <section class="block" id="rc-outcome">
-      <p class="label">08 / Outcome &amp; reflection</p>
+      <p class="label">07 / Outcome &amp; reflection</p>
       <h2 class="sec">A scoped solution that <em>held its ground.</em></h2>
       <div class="prose" style="margin-top:24px">
         <p>The redesigned return entry workflow launched at the sister lab as part of the LMS MVP and stayed in use through the end of my time on the team, giving data-entry users a familiar, functional process in a new system. The case-linking pattern from the legacy system carried over intact, the side panel reduced friction for high-volume users, and the RMA prefix laid the groundwork for future customer-initiated returns.</p>
         <p>The design didn’t solve everything the original concept set out to. But it solved what it needed to, for the users who needed it most, within the constraints that existed.</p>
       </div>
       <div class="callout"><p><strong>What I’d do differently:</strong> I’d advocate earlier for even lightweight usability testing with actual data-entry users before finalizing the side panel layout. We relied heavily on legacy system comparisons and internal review. Real user observation would have surfaced edge cases faster.</p></div>
+    </section>
+
+    <section class="block" id="rc-challenges">
+      <p class="label">08 / Challenges</p>
+      <h2 class="sec">Challenges <em>I faced.</em></h2>
+      <div style="margin-top:36px">
+        <div class="challenge"><span class="rownum">01</span><div><h4>Taking on a complex problem with little business knowledge</h4><p>As the newest member of the team, I had limited understanding of the business and almost no familiarity with the design work done before my arrival. Getting up to speed quickly wasn’t optional, because the deadline was already close.</p><p style="margin-top:12px"><strong>What I did:</strong> I connected with stakeholders directly to gain business context, and collaborated with fellow designers to review previous documentation and design decisions. The time investment gave me the foundation I needed to make informed decisions rather than assumptions.</p></div></div>
+        <div class="challenge"><span class="rownum">02</span><div><h4>Designing for MVP with significant constraints</h4><p>Replacing a robust legacy system with an MVP is never straightforward, especially when the business workflow is complex and edge cases are everywhere. The scope had already been cut once, and I was designing within what remained.</p><p style="margin-top:12px"><strong>What I did:</strong> I kept the first release in perspective: it’s a starting point, not a final answer. I communicated regularly with engineers to align on what was technically feasible, making deliberate compromises that didn’t close the door on future improvements.</p></div></div>
+      </div>
     </section>
 
     </div>
